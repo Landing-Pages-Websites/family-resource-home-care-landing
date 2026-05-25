@@ -102,48 +102,6 @@ export function Services({ territory }: ServicesProps) {
               </div>
             </Reveal>
           ))}
-
-          {/* 8th tile: closing CTA */}
-          <Reveal variant="up" delay={SERVICES.length * 70}>
-            <div className="h-full bg-[var(--color-primary)] rounded-2xl p-6 sm:p-7 text-white flex flex-col justify-between">
-              <div>
-                <div className="w-12 h-12 rounded-xl bg-white/15 text-[var(--color-accent)] flex items-center justify-center">
-                  <svg
-                    className="w-6 h-6"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M12 8v4l3 3M21 12c0 5-4 9-9 9s-9-4-9-9 4-9 9-9 9 4 9 9z"
-                    />
-                  </svg>
-                </div>
-                <h3 className="mt-4 text-lg font-extrabold leading-snug">
-                  Not sure where to start?
-                </h3>
-                <p className="mt-2 text-[15px] text-white/85 leading-relaxed">
-                  Our care coordinators in {territory.name} will walk you
-                  through every option in a friendly, no-pressure call.
-                </p>
-              </div>
-              <div className="mt-5 flex flex-col sm:flex-row gap-2.5">
-                <a href="#contact" className="btn-primary w-full text-sm">
-                  Free Assessment
-                </a>
-                <a
-                  href={territory.phoneHref}
-                  className="btn-outline-light w-full text-sm"
-                >
-                  Call {territory.phoneDisplay}
-                </a>
-              </div>
-            </div>
-          </Reveal>
         </div>
       </div>
     </section>

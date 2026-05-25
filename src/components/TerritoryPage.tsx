@@ -5,7 +5,9 @@ import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { Stats } from "@/components/Stats";
 import { Services } from "@/components/Services";
+import { HowItWorks } from "@/components/HowItWorks";
 import { Welcome } from "@/components/Welcome";
+import { VideoStory } from "@/components/VideoStory";
 import { WhyUs } from "@/components/WhyUs";
 import { Locations } from "@/components/Locations";
 import { Testimonials } from "@/components/Testimonials";
@@ -31,7 +33,9 @@ export function TerritoryPage({ territoryId }: TerritoryPageProps) {
       <Hero territory={territory} />
       <Stats />
       <Services territory={territory} />
+      <HowItWorks territory={territory} />
       <Welcome territory={territory} />
+      <VideoStory territory={territory} />
       <WhyUs territory={territory} />
       <Locations territory={territory} />
       <Testimonials />
