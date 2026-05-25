@@ -1,0 +1,158 @@
+@import "tailwindcss";
+
+@theme {
+  /* Family Resource Home Care — Brand tokens
+   * Primary navy/teal sampled from familyresourcehomecare.com header & buttons.
+   * Warm orange accent for high-conversion CTAs against the navy.
+   */
+  --color-primary: #13406b;          /* FRHC navy — header, h2, anchors */
+  --color-primary-dark: #0b2a48;
+  --color-primary-light: #1f5687;
+  --color-accent: #46bcec;            /* Sky-teal — secondary highlights & links */
+  --color-accent-dark: #2a9fcf;
+  --color-cta: #f5a623;                /* Warm CTA orange — buttons on navy */
+  --color-cta-dark: #d88e0f;
+  --color-soft: #f0f3f6;              /* Soft cool-gray section background */
+  --color-soft-2: #e2e8ee;
+  --color-warm: #fff7eb;              /* Warm cream accent for testimonial cards */
+  --color-text: #14181f;
+  --color-text-muted: #57606e;
+  --color-border: #dbe0e8;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f7f9fc;
+  --color-success: #608f3e;
+
+  --font-display: var(--font-display-var, "Manrope"), system-ui, sans-serif;
+  --font-body: var(--font-body-var, "Inter"), system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-text);
+  background: var(--color-surface);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-display);
+  letter-spacing: -0.015em;
+}
+
+h1 { letter-spacing: -0.028em; }
+
+*:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* ───────────── Form input ───────────── */
+.lp-input {
+  width: 100%;
+  border: 1px solid var(--color-border);
+  background: white;
+  border-radius: 0.5rem;
+  padding: 0.875rem 1rem;
+  font-size: 1rem;
+  color: var(--color-text);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.lp-input::placeholder { color: #9ca3af; }
+.lp-input:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(70, 188, 236, 0.20);
+  outline: none;
+}
+.lp-input-error {
+  border-color: #dc2626 !important;
+  background: #fef2f2;
+}
+.lp-input-error:focus {
+  border-color: #dc2626 !important;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.18);
+}
+.lp-field-error {
+  margin-top: 0.375rem;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  font-weight: 600;
+  color: #dc2626;
+}
+
+/* ───────────── Buttons ───────────── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--color-cta);
+  color: #ffffff;
+  font-weight: 800;
+  padding: 0.95rem 1.6rem;
+  border-radius: 0.6rem;
+  font-family: var(--font-display);
+  letter-spacing: 0.01em;
+  font-size: 0.95rem;
+  box-shadow: 0 6px 18px -6px rgba(245, 166, 35, 0.55);
+  transition: background 0.18s, transform 0.18s, box-shadow 0.18s;
+}
+.btn-primary:hover {
+  background: var(--color-cta-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px -8px rgba(245, 166, 35, 0.6);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+  font-weight: 700;
+  padding: 0.85rem 1.5rem;
+  border-radius: 0.6rem;
+  font-family: var(--font-display);
+  background: transparent;
+  font-size: 0.95rem;
+  transition: background 0.18s, color 0.18s;
+}
+.btn-secondary:hover {
+  background: var(--color-primary);
+  color: #ffffff;
+}
+
+.btn-outline-light {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 2px solid rgba(255, 255, 255, 0.55);
+  color: white;
+  font-weight: 700;
+  padding: 0.85rem 1.5rem;
+  border-radius: 0.6rem;
+  font-family: var(--font-display);
+  background: transparent;
+  transition: background 0.18s, border-color 0.18s, color 0.18s;
+}
+.btn-outline-light:hover {
+  border-color: var(--color-cta);
+  color: var(--color-cta);
+}
+
+/* Soft cyan accent stripe over the hero — gentle/warm, not tactical */
+.warm-grid-bg {
+  background-image:
+    radial-gradient(circle at 12% 8%, rgba(70, 188, 236, 0.18), transparent 45%),
+    radial-gradient(circle at 88% 92%, rgba(245, 166, 35, 0.18), transparent 50%);
+}
+
+@media (max-width: 640px) {
+  h1 { line-height: 1.06; }
+}
