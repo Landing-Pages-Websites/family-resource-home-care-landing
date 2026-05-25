@@ -38,7 +38,7 @@ export function TerritoryPage({ territoryId }: TerritoryPageProps) {
       <FAQ territory={territory} />
       <Contact territory={territory} />
       <Footer territory={territory} />
-      <FloatingCTA territory={territory} />
+      <FloatingCTA />
     </main>
   );
 }

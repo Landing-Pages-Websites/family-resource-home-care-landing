@@ -1,0 +1,121 @@
+{
+  "atlas_task_id": "735fe782-2338-46ae-a778-ea63004cae8a",
+  "customer_id": "af6bf9ba-151a-4d28-9786-6a585c237ead",
+  "customer_name": "Family Resource Home Care",
+  "primary_source_site": "https://www.familyresourcehomecare.com",
+  "verified_at": "2026-05-25",
+  "stats": [
+    {
+      "claim": "Family-owned and trusted in the Pacific Northwest since 1996.",
+      "source": "https://www.familyresourcehomecare.com — homepage hero copy and About > Our History tagline; confirms 1996 founding.",
+      "stat_value": "28+ years caring"
+    },
+    {
+      "claim": "Free in-home assessments available — same day or next day.",
+      "source": "Atlas task input_data.content_requests: 'Prominent offer: Free in-home assessment — available same day or next day'.",
+      "stat_value": "Same Day Assessments"
+    },
+    {
+      "claim": "Best of Home Care — Provider, Employer & Leader in Experience.",
+      "source": "https://www.familyresourcehomecare.com/about/awards-reviews-testimonials/awards/ — Home Care Pulse / Activated Insights badges for Best of Home Care Provider, Employer of Choice, and Leader in Experience.",
+      "asset_files": [
+        "public/images/badge-best-of-home-care.png (sourced from https://www.familyresourcehomecare.com/wp-content/uploads/2024/02/Best-of-Home-Care-2024.png)",
+        "public/images/badge-leader.png (sourced from https://www.familyresourcehomecare.com/wp-content/uploads/2023/02/2023-leader.png)",
+        "public/images/hcp-logo.png (sourced from https://www.familyresourcehomecare.com/wp-content/uploads/2020/10/hcp-logo-1.png)"
+      ]
+    },
+    {
+      "claim": "Caregivers are hand-matched, background-checked, and supervised by your local office.",
+      "source": "https://www.familyresourcehomecare.com/how-we-help/frequently-asked-questions/ — FAQ entries on caregiver screening and matching; consistent across territory pages."
+    }
+  ],
+  "services_offered": {
+    "source": "Atlas task input_data.content_requests — verbatim list: Personal Care, Companion Care, Meal Preparation, Transportation & Errands, Veteran Care, After-Hospital/Transitional Care, Respite Care.",
+    "cross_check": "https://www.familyresourcehomecare.com — Services menu lists all 7 (plus several explicitly EXCLUDED from this LP per task spec)."
+  },
+  "excluded_terms": {
+    "source": "Atlas task input_data.content_requests — 'Do NOT mention home health, assisted living, Medicare, or dementia/Alzheimer's services'.",
+    "terms": ["home health", "assisted living", "Medicare", "dementia", "Alzheimer"]
+  },
+  "payment_types": {
+    "source": "Atlas task input_data.content_requests — verbatim: Medicaid, Veterans Affairs (VA) benefits, private pay, long-term care insurance.",
+    "values": ["Medicaid", "Veterans Affairs (VA) benefits", "Private pay", "Long-term care insurance"]
+  },
+  "phone_numbers": {
+    "source": "Atlas task input_data.phone_routing_number and input_data.differences — territory-specific CTM numbers supplied by AM.",
+    "values": {
+      "portland-east": "(503) 239-8000",
+      "portland-west": "(503) 670-7260",
+      "hillsboro": "(971) 865-0101",
+      "gresham": "(503) 512-7560",
+      "oregon-city": "(971) 430-2384"
+    }
+  },
+  "territory_geography": {
+    "source": "Atlas task input_data.differences — verbatim ZIP-coverage descriptions per territory, plus FRHC live location pages (https://www.familyresourcehomecare.com/locations/portland-east-or/, .../portland-west-or/, .../hillsboro-or/, .../home-care-in-gresham/, .../home-care-in-oregon-city/)."
+  },
+  "branch_addresses_and_emails": {
+    "source": "https://www.familyresourcehomecare.com/locations/portland-east-or/ etc. — Portland East confirms 12550 SE 93rd Ave Ste 160, Clackamas, OR 97015 and portlandeast@familyrhc.com. Other territories list 'by appointment' on their live pages, mirrored here.",
+    "values": {
+      "portland-east": {
+        "address": "12550 SE 93rd Ave Ste 160, Clackamas, OR 97015",
+        "email": "portlandeast@familyrhc.com"
+      },
+      "portland-west": {
+        "address": "Serving the Portland West Metro — by appointment",
+        "email": "portlandwest@familyrhc.com"
+      },
+      "hillsboro": {
+        "address": "Serving Washington & Columbia Counties — by appointment",
+        "email": "hillsboro@familyrhc.com"
+      },
+      "gresham": {
+        "address": "Serving East Multnomah County — by appointment",
+        "email": "gresham@familyrhc.com"
+      },
+      "oregon-city": {
+        "address": "Serving South Clackamas County — by appointment",
+        "email": "oregoncity@familyrhc.com"
+      }
+    }
+  },
+  "testimonials": {
+    "source": "https://www.familyresourcehomecare.com/about/awards-reviews-testimonials/testimonials/ — verbatim quotes captured 2026-05-25. All 3 testimonials on the LP are exact quotes from the public testimonials page.",
+    "selection_criteria": "Excluded any testimonial that mentions topics off-limit per task spec (dementia, Alzheimer's, home health). Selected ones that highlight Portland Metro presence, caregiver matching, and practical in-home support."
+  },
+  "faq_content": {
+    "source": "https://www.familyresourcehomecare.com/how-we-help/frequently-asked-questions/ — lightly paraphrased FAQ entries.",
+    "scope_filter": "Excluded any Q&A that mentioned forbidden topics. Service-list answer trimmed to the 7 services in the task spec."
+  },
+  "tracking": {
+    "gtm_container": {
+      "value": "GTM-W95T5CC",
+      "source": "Atlas task comment from lindsay@gomega.ai (2026-05-25T04:57:04Z): 'this is the GTM to use GTM-W95T5CC, make sure no other ones are on the site! ... use the same one on all 5 pages.'"
+    },
+    "mega_site": {
+      "site_id": "bc581877-3414-42e7-a11e-a499c8292999",
+      "site_key": "9ifd6n234obt4607",
+      "source": "Provisioned via `mega site-tracking enable --site-url https://call.familyresourcehomecare.com --gtm-id GTM-W95T5CC --type MEGA_LANDING_PAGE` on 2026-05-25."
+    },
+    "ctm": {
+      "value": "572388.tctm.co/t.js",
+      "source": "Division standard CTM script for MEGA-team LPs (verified against existing live LPs in the Landing-Pages-Websites org)."
+    },
+    "meta_pixel": {
+      "value": null,
+      "source": "Not provided in task input. Escalated as low-severity follow-up in output_data.escalations."
+    }
+  },
+  "images": {
+    "logo.png": "https://www.familyresourcehomecare.com/wp-content/uploads/2020/10/logo-2x.png",
+    "logo-square.png": "https://www.familyresourcehomecare.com/wp-content/uploads/2021/08/frhc-logo-square.png",
+    "favicon.png": "https://www.familyresourcehomecare.com/wp-content/uploads/2024/03/favicon96.png",
+    "images/caregiver-hero.jpg": "https://www.familyresourcehomecare.com/wp-content/uploads/2018/10/P1077421.jpg",
+    "images/family-home.jpg": "https://www.familyresourcehomecare.com/wp-content/uploads/2019/04/fam-home-banner.jpg",
+    "images/caregiver-companion.jpg": "https://www.familyresourcehomecare.com/wp-content/uploads/2021/09/A-Paycheck-with-a-Purpose_06-e1632156549755.jpg",
+    "images/senior-care.png": "https://www.familyresourcehomecare.com/wp-content/uploads/2023/01/Featured-Images-on-Pages-33.png",
+    "images/badge-best-of-home-care.png": "https://www.familyresourcehomecare.com/wp-content/uploads/2024/02/Best-of-Home-Care-2024.png",
+    "images/badge-leader.png": "https://www.familyresourcehomecare.com/wp-content/uploads/2023/02/2023-leader.png",
+    "images/hcp-logo.png": "https://www.familyresourcehomecare.com/wp-content/uploads/2020/10/hcp-logo-1.png"
+  }
+}
