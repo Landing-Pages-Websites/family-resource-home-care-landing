@@ -26,6 +26,14 @@ const STEPS = [
   },
 ];
 
+/**
+ * Distinct full-width "Not sure where to start?" CTA band.
+ * Per Lindsay 2026-05-25 spec: pull the "Not sure where to start?" block out
+ * of the feature-card grid and render it as a clearly differentiated band
+ * between Services and Why Us. Uses a horizontal stepper (not cards) on a
+ * dark navy gradient so it visually breaks from the Services card grid
+ * above and the Why Us card grid below.
+ */
 export function HowItWorks({ territory }: HowItWorksProps) {
   return (
     <section
@@ -35,7 +43,7 @@ export function HowItWorks({ territory }: HowItWorksProps) {
       {/* Lifestyle background photo, dimmed */}
       <div aria-hidden className="absolute inset-0 pointer-events-none">
         <Image
-          src="/images/caregiver-companion.jpg"
+          src={territory.images.howItWorksBg.src}
           alt=""
           fill
           className="object-cover object-center opacity-[0.15]"
@@ -46,14 +54,24 @@ export function HowItWorks({ territory }: HowItWorksProps) {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "linear-gradient(180deg, rgba(11,42,72,0.92), rgba(11,42,72,0.96))",
+            "linear-gradient(180deg, rgba(11,42,72,0.92), rgba(11,42,72,0.97))",
         }}
+      />
+      {/* Accent stripes top & bottom to differentiate from surrounding card grids */}
+      <div
+        aria-hidden
+        className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[var(--color-accent)] via-[var(--color-cta)] to-[var(--color-accent)]"
+      />
+      <div
+        aria-hidden
+        className="absolute bottom-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[var(--color-accent)] via-[var(--color-cta)] to-[var(--color-accent)]"
       />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
         <div className="max-w-3xl mx-auto text-center">
           <Reveal variant="up">
-            <span className="inline-block px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-white/10 text-[var(--color-accent)]">
+            <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-[0.18em] bg-[var(--color-accent)]/20 text-[var(--color-accent)] border border-[var(--color-accent)]/40">
+              <span className="w-2 h-2 rounded-full bg-[var(--color-accent)] animate-pulse" />
               Not sure where to start?
             </span>
           </Reveal>
@@ -71,26 +89,37 @@ export function HowItWorks({ territory }: HowItWorksProps) {
           </Reveal>
         </div>
 
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
-          {STEPS.map((step, i) => (
-            <Reveal key={step.num} variant="up" delay={i * 100}>
-              <div className="h-full bg-white/[0.07] backdrop-blur rounded-2xl p-6 sm:p-7 border border-white/15">
-                <div className="text-[var(--color-accent)] font-extrabold text-3xl sm:text-4xl tracking-tight">
-                  {step.num}
-                </div>
-                <h3 className="mt-3 text-xl font-extrabold leading-snug">
-                  {step.title}
-                </h3>
-                <p className="mt-2 text-[15px] text-white/80 leading-relaxed">
-                  {step.body.replace("{territory.name}", territory.name)}
-                </p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
+        {/* Horizontal connected stepper — visually distinct from card grids */}
+        <Reveal variant="up" delay={220}>
+          <div className="mt-12 sm:mt-14 relative">
+            {/* Connector line (desktop) */}
+            <div
+              aria-hidden
+              className="hidden md:block absolute top-7 left-[10%] right-[10%] h-px bg-gradient-to-r from-transparent via-[var(--color-accent)]/60 to-transparent"
+            />
+            <ol className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 relative">
+              {STEPS.map((step) => (
+                <li
+                  key={step.num}
+                  className="relative text-center px-2"
+                >
+                  <div className="mx-auto w-14 h-14 sm:w-[3.75rem] sm:h-[3.75rem] rounded-full bg-[var(--color-accent)] text-[var(--color-primary)] flex items-center justify-center font-extrabold text-xl shadow-lg ring-4 ring-[var(--color-primary)]">
+                    {step.num}
+                  </div>
+                  <h3 className="mt-5 text-lg sm:text-xl font-extrabold leading-snug text-white">
+                    {step.title}
+                  </h3>
+                  <p className="mt-2.5 text-[14px] sm:text-[15px] text-white/80 leading-relaxed max-w-sm mx-auto">
+                    {step.body.replace("{territory.name}", territory.name)}
+                  </p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </Reveal>
 
         <Reveal variant="up" delay={400}>
-          <div className="mt-10 sm:mt-12 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+          <div className="mt-12 sm:mt-14 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
             <a href="#contact" className="btn-primary text-base sm:text-lg">
               Request My Free Assessment
               <svg

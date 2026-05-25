@@ -28,6 +28,22 @@ export type TerritoryId =
   | "gresham"
   | "oregon-city";
 
+// ─── Imagery slots (per-route, no duplicates within a single page) ───
+// Source: all photos pulled from familyresourcehomecare.com (see content-sources.json).
+// Each slot MUST resolve to a distinct file per route (Lindsay 2026-05-25:
+// "no duplicate images per page"). Across routes, files may repeat.
+export interface TerritoryImage {
+  src: string;
+  alt: string;
+}
+export interface TerritoryImageSet {
+  heroBg: TerritoryImage;
+  photoBand: TerritoryImage;
+  welcomeMain: TerritoryImage;
+  howItWorksBg: TerritoryImage;
+  videoStoryPhoto: TerritoryImage;
+}
+
 export interface Territory {
   id: TerritoryId;
   name: string;
@@ -43,6 +59,7 @@ export interface Territory {
   heroPattern: string; // 1-line marketing hook for hero badge
   metaTitle: string;
   metaDescription: string;
+  images: TerritoryImageSet;
 }
 
 export const TERRITORIES: Record<TerritoryId, Territory> = {
@@ -72,6 +89,28 @@ export const TERRITORIES: Record<TerritoryId, Territory> = {
       "In-Home Care in Portland East | Clackamas & Happy Valley | Family Resource Home Care",
     metaDescription:
       "Personal care, companion care, meal prep & veteran care across Clackamas, Milwaukie, Happy Valley & SE Portland. Free in-home assessment — same or next day. Call (503) 239-8000.",
+    images: {
+      heroBg: {
+        src: "/images/caregiver-hero.jpg",
+        alt: "Family Resource Home Care caregiver supporting a senior at home in the Portland Metro",
+      },
+      photoBand: {
+        src: "/images/frhc-team-moment.webp",
+        alt: "Family Resource Home Care caregivers sharing a warm moment with a client at home",
+      },
+      welcomeMain: {
+        src: "/images/family-home.jpg",
+        alt: "Caregiver and senior client smiling together in Portland East, Oregon",
+      },
+      howItWorksBg: {
+        src: "/images/caregiver-companion.jpg",
+        alt: "",
+      },
+      videoStoryPhoto: {
+        src: "/images/frhc-about.webp",
+        alt: "Family Resource Home Care team helping a Pacific Northwest senior at home",
+      },
+    },
   },
   "portland-west": {
     id: "portland-west",
@@ -100,6 +139,28 @@ export const TERRITORIES: Record<TerritoryId, Territory> = {
       "In-Home Care in Portland West | Beaverton, Lake Oswego & Tualatin | Family Resource Home Care",
     metaDescription:
       "Personal care, companion care, meal prep & veteran care across Beaverton, Lake Oswego, Tualatin, West Linn & SW Portland. Free in-home assessment — same or next day. Call (503) 670-7260.",
+    images: {
+      heroBg: {
+        src: "/images/frhc-hero-wide.webp",
+        alt: "Family Resource Home Care caregiver visiting a senior at home in Beaverton, Oregon",
+      },
+      photoBand: {
+        src: "/images/caregiver-hero.jpg",
+        alt: "Caregiver assisting a senior client in their Portland-area home",
+      },
+      welcomeMain: {
+        src: "/images/caregiver-companion.jpg",
+        alt: "Caregiver providing companion care to a senior in Portland West, Oregon",
+      },
+      howItWorksBg: {
+        src: "/images/family-home.jpg",
+        alt: "",
+      },
+      videoStoryPhoto: {
+        src: "/images/frhc-team-moment.webp",
+        alt: "Family Resource Home Care caregivers caring for a Pacific Northwest family",
+      },
+    },
   },
   hillsboro: {
     id: "hillsboro",
@@ -128,6 +189,28 @@ export const TERRITORIES: Record<TerritoryId, Territory> = {
       "In-Home Care in Hillsboro | Forest Grove, Cornelius & St. Helens | Family Resource Home Care",
     metaDescription:
       "Personal care, companion care, meal prep & veteran care across Hillsboro, Forest Grove, Cornelius, St. Helens & NW Portland. Free in-home assessment — same or next day. Call (971) 865-0101.",
+    images: {
+      heroBg: {
+        src: "/images/caregiver-hero.jpg",
+        alt: "Family Resource Home Care caregiver supporting a senior at home in Hillsboro, Oregon",
+      },
+      photoBand: {
+        src: "/images/frhc-about.webp",
+        alt: "Family Resource Home Care care coordinator visiting a Hillsboro-area home",
+      },
+      welcomeMain: {
+        src: "/images/frhc-team-moment.webp",
+        alt: "Caregiver and senior client laughing together in Hillsboro, Oregon",
+      },
+      howItWorksBg: {
+        src: "/images/family-home.jpg",
+        alt: "",
+      },
+      videoStoryPhoto: {
+        src: "/images/caregiver-companion.jpg",
+        alt: "Family Resource Home Care companion-care visit in the Pacific Northwest",
+      },
+    },
   },
   gresham: {
     id: "gresham",
@@ -156,6 +239,28 @@ export const TERRITORIES: Record<TerritoryId, Territory> = {
       "In-Home Care in Gresham | Troutdale, Fairview & Sandy | Family Resource Home Care",
     metaDescription:
       "Personal care, companion care, meal prep & veteran care across Gresham, Troutdale, Fairview, Sandy & Damascus. Free in-home assessment — same or next day. Call (503) 512-7560.",
+    images: {
+      heroBg: {
+        src: "/images/frhc-hero-wide.webp",
+        alt: "Family Resource Home Care caregiver visiting a senior at home in Gresham, Oregon",
+      },
+      photoBand: {
+        src: "/images/family-home.jpg",
+        alt: "Caregiver and senior client at home together in Gresham, Oregon",
+      },
+      welcomeMain: {
+        src: "/images/caregiver-hero.jpg",
+        alt: "Caregiver providing in-home care to a senior in Gresham, Oregon",
+      },
+      howItWorksBg: {
+        src: "/images/frhc-team-moment.webp",
+        alt: "",
+      },
+      videoStoryPhoto: {
+        src: "/images/frhc-about.webp",
+        alt: "Family Resource Home Care team helping a Pacific Northwest senior at home",
+      },
+    },
   },
   "oregon-city": {
     id: "oregon-city",
@@ -183,6 +288,28 @@ export const TERRITORIES: Record<TerritoryId, Territory> = {
       "In-Home Care in Oregon City | Canby, Estacada & Molalla | Family Resource Home Care",
     metaDescription:
       "Personal care, companion care, meal prep & veteran care across Oregon City, Canby, Estacada & Molalla. Free in-home assessment — same or next day. Call (971) 430-2384.",
+    images: {
+      heroBg: {
+        src: "/images/caregiver-hero.jpg",
+        alt: "Family Resource Home Care caregiver assisting a senior at home in Oregon City, Oregon",
+      },
+      photoBand: {
+        src: "/images/frhc-team-moment.webp",
+        alt: "Family Resource Home Care caregivers visiting a senior client in Oregon City",
+      },
+      welcomeMain: {
+        src: "/images/frhc-about.webp",
+        alt: "Caregiver and senior client smiling together in Oregon City, Oregon",
+      },
+      howItWorksBg: {
+        src: "/images/frhc-hero-wide.webp",
+        alt: "",
+      },
+      videoStoryPhoto: {
+        src: "/images/family-home.jpg",
+        alt: "Family Resource Home Care caregiver and senior at home in the Pacific Northwest",
+      },
+    },
   },
 };
 

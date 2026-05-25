@@ -62,8 +62,8 @@ export function VideoStory({ territory }: VideoStoryProps) {
           <Reveal variant="right" delay={220}>
             <div className="relative h-56 sm:h-64 rounded-2xl overflow-hidden shadow-lg">
               <Image
-                src="/images/family-home.jpg"
-                alt="A Family Resource Home Care caregiver and senior client laughing together"
+                src={territory.images.videoStoryPhoto.src}
+                alt={territory.images.videoStoryPhoto.alt}
                 fill
                 className="object-cover"
               />

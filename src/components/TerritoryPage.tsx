@@ -4,6 +4,7 @@ import { useTracking } from "@/hooks/useTracking";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { Stats } from "@/components/Stats";
+import { PhotoBand } from "@/components/PhotoBand";
 import { Services } from "@/components/Services";
 import { HowItWorks } from "@/components/HowItWorks";
 import { Welcome } from "@/components/Welcome";
@@ -32,11 +33,12 @@ export function TerritoryPage({ territoryId }: TerritoryPageProps) {
       <Header territory={territory} />
       <Hero territory={territory} />
       <Stats />
+      <PhotoBand territory={territory} />
+      <Welcome territory={territory} />
       <Services territory={territory} />
       <HowItWorks territory={territory} />
-      <Welcome territory={territory} />
-      <VideoStory territory={territory} />
       <WhyUs territory={territory} />
+      <VideoStory territory={territory} />
       <Locations territory={territory} />
       <Testimonials />
       <FAQ territory={territory} />

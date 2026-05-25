@@ -15,8 +15,8 @@ export function Welcome({ territory }: WelcomeProps) {
         <Reveal variant="left">
           <div className="relative aspect-[4/5] sm:aspect-[5/6] rounded-3xl overflow-hidden shadow-xl">
             <Image
-              src="/images/family-home.jpg"
-              alt={`Caregiver and senior client smiling together in ${territory.name}, Oregon`}
+              src={territory.images.welcomeMain.src}
+              alt={territory.images.welcomeMain.alt}
               fill
               className="object-cover"
             />

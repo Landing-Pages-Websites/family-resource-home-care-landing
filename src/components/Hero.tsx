@@ -18,7 +18,7 @@ export function Hero({ territory }: HeroProps) {
       {/* Background caregiver photo, gently dimmed */}
       <div aria-hidden className="absolute inset-0 pointer-events-none">
         <Image
-          src="/images/caregiver-hero.jpg"
+          src={territory.images.heroBg.src}
           alt=""
           fill
           priority

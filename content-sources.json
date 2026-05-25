@@ -114,8 +114,30 @@
     "images/family-home.jpg": "https://www.familyresourcehomecare.com/wp-content/uploads/2019/04/fam-home-banner.jpg",
     "images/caregiver-companion.jpg": "https://www.familyresourcehomecare.com/wp-content/uploads/2021/09/A-Paycheck-with-a-Purpose_06-e1632156549755.jpg",
     "images/senior-care.png": "https://www.familyresourcehomecare.com/wp-content/uploads/2023/01/Featured-Images-on-Pages-33.png",
+    "images/frhc-about.webp": "https://www.familyresourcehomecare.com/wp-content/uploads/2023/11/FRHCAbout2-1.webp",
+    "images/frhc-team-moment.webp": "https://www.familyresourcehomecare.com/wp-content/uploads/2023/10/K4A2552-1-1200x800.webp",
+    "images/frhc-hero-wide.webp": "https://www.familyresourcehomecare.com/wp-content/uploads/2023/10/Family-Resource-Home-Care-Hero_01-scaled.webp",
     "images/badge-best-of-home-care.png": "https://www.familyresourcehomecare.com/wp-content/uploads/2024/02/Best-of-Home-Care-2024.png",
     "images/badge-leader.png": "https://www.familyresourcehomecare.com/wp-content/uploads/2023/02/2023-leader.png",
     "images/hcp-logo.png": "https://www.familyresourcehomecare.com/wp-content/uploads/2020/10/hcp-logo-1.png"
+  },
+  "edit_2026_05_25_imagery_refresh": {
+    "task_id": "253b9b33-9f4a-4f3c-ae96-c29778254297",
+    "spec_source": "Atlas task input_data.edit_description + Lindsay 2026-05-25 20:42 follow-up comment.",
+    "rules_enforced": [
+      "No duplicate image src within a single route (verified by Brand.ts images map — 5 distinct files per route).",
+      "FRHC video (YouTube embed JCQiaW_uyow) preserved in VideoStory section on every route.",
+      "At least one new imagery moment added in the upper third via PhotoBand component (between Stats and Welcome).",
+      "All images sourced from familyresourcehomecare.com — no off-brand stock.",
+      "Every hero visibly depicts in-home senior care (HARD RULE 7b)."
+    ],
+    "per_route_image_assignments": {
+      "portland-east": ["caregiver-hero.jpg (hero bg)","frhc-team-moment.webp (photo band)","family-home.jpg (welcome)","caregiver-companion.jpg (how-it-works bg)","frhc-about.webp (video story)"],
+      "portland-west": ["frhc-hero-wide.webp (hero bg)","caregiver-hero.jpg (photo band)","caregiver-companion.jpg (welcome)","family-home.jpg (how-it-works bg)","frhc-team-moment.webp (video story)"],
+      "hillsboro": ["caregiver-hero.jpg (hero bg)","frhc-about.webp (photo band)","frhc-team-moment.webp (welcome)","family-home.jpg (how-it-works bg)","caregiver-companion.jpg (video story)"],
+      "gresham": ["frhc-hero-wide.webp (hero bg)","family-home.jpg (photo band)","caregiver-hero.jpg (welcome)","frhc-team-moment.webp (how-it-works bg)","frhc-about.webp (video story)"],
+      "oregon-city": ["caregiver-hero.jpg (hero bg)","frhc-team-moment.webp (photo band)","frhc-about.webp (welcome)","frhc-hero-wide.webp (how-it-works bg)","family-home.jpg (video story)"]
+    },
+    "structural_change": "HowItWorks ('Not sure where to start?') now sits between Services and WhyUs, redesigned as a full-width dark-navy band with horizontal stepper + accent stripes — visually distinct from the white card grids above (Services) and below (WhyUs)."
   }
 }
