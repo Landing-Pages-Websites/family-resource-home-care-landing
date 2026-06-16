@@ -59,8 +59,8 @@ export function PhotoBand({ territory }: PhotoBandProps) {
             </Reveal>
             <Reveal variant="up" delay={140}>
               <p className="mt-4 text-[15px] sm:text-base text-[var(--color-text-muted)] leading-relaxed">
-                Every Family Resource Home Care visit in {territory.name} starts
-                with a caregiver who has been thoughtfully matched to your
+                Every Family Resource Home Care visit in {territory.name}{" "}
+                starts with a caregiver who has been thoughtfully matched to your
                 loved one&rsquo;s personality, routine, and home. We hire for
                 warmth first &mdash; then back every caregiver with a local
                 care-coordination team, 24/7 on-call support, and a free
