@@ -17,6 +17,9 @@ import {
 interface LeadFormProps {
   territory: Territory;
   variant?: "hero" | "contact";
+  /** Tightens internal spacing so the submit control fits the initial
+   *  viewport. Used by the Portland West hero only. */
+  compact?: boolean;
   headline?: string;
   subhead?: string;
 }
@@ -107,6 +110,7 @@ function validateAll(data: FormData): FieldErrors {
 export function LeadForm({
   territory,
   variant = "hero",
+  compact = false,
   headline,
   subhead,
 }: LeadFormProps) {
@@ -377,6 +381,17 @@ export function LeadForm({
   const inputCls = (k: FieldKey) =>
     `lp-input ${showErr(k) ? "lp-input-error" : ""}`;
 
+  // Portland West hero packs a seven-field form into a short viewport, so the
+  // compact variant tightens the vertical rhythm while keeping every field and
+  // ≥44px touch targets intact.
+  const fieldGap = compact ? "gap-2.5" : "gap-3";
+  const rowGap = compact ? "mt-2.5" : "mt-3";
+  const groupGap = compact ? "mt-3" : "mt-4";
+  const submitMt = compact ? "mt-4" : "mt-5";
+  const noteMt = compact ? "mt-2.5" : "mt-3";
+  const headWrap = compact ? "mb-4" : "mb-5 sm:mb-6";
+  const headText = compact ? "text-lg sm:text-xl" : "text-xl sm:text-2xl";
+
   return (
     <form
       ref={formRef}
@@ -392,9 +407,9 @@ export function LeadForm({
       }
     >
       {(headline || subhead) && (
-        <div className="mb-5 sm:mb-6">
+        <div className={headWrap}>
           {headline && (
-            <h3 className="text-xl sm:text-2xl font-extrabold text-[var(--color-primary)] leading-tight">
+            <h3 className={`${headText} font-extrabold text-[var(--color-primary)] leading-tight`}>
               {headline}
             </h3>
           )}
@@ -406,7 +421,7 @@ export function LeadForm({
         </div>
       )}
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <div className={`grid grid-cols-1 sm:grid-cols-2 ${fieldGap}`}>
         <div>
           <label htmlFor={id("firstName")} className="sr-only">
             First name
@@ -477,7 +492,7 @@ export function LeadForm({
         </div>
       </div>
 
-      <div className="mt-3">
+      <div className={rowGap}>
         <label htmlFor={id("email")} className="sr-only">
           Email
         </label>
@@ -511,7 +526,7 @@ export function LeadForm({
         )}
       </div>
 
-      <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <div className={`${rowGap} grid grid-cols-1 sm:grid-cols-2 ${fieldGap}`}>
         <div>
           <label htmlFor={id("phone")} className="sr-only">
             Phone
@@ -583,7 +598,7 @@ export function LeadForm({
 
       {/* Q1 — Ready to receive care? (Yes/No required) */}
       <div
-        className="mt-4"
+        className={groupGap}
         ref={(el) => {
           fieldRefs.current.ready = el;
         }}
@@ -646,7 +661,7 @@ export function LeadForm({
       </div>
 
       {/* Q2 — How did you hear about us? (optional) */}
-      <div className="mt-4">
+      <div className={groupGap}>
         <label
           htmlFor={id("heardFrom")}
           className="block text-xs uppercase tracking-wider font-bold text-[var(--color-primary)] mb-1.5"
@@ -716,12 +731,12 @@ export function LeadForm({
         type="button"
         onClick={handleClick}
         disabled={submitting || success}
-        className="btn-primary w-full mt-5 text-base sm:text-lg py-3.5 disabled:opacity-60 disabled:cursor-not-allowed"
+        className={`btn-primary w-full ${submitMt} text-base sm:text-lg py-3.5 disabled:opacity-60 disabled:cursor-not-allowed`}
       >
         {submitting ? "Sending…" : "Request My Free In-Home Assessment"}
       </button>
 
-      <p className="mt-3 text-[11px] sm:text-xs leading-relaxed text-[var(--color-text-muted)] text-center">
+      <p className={`${noteMt} text-[11px] sm:text-xs leading-relaxed text-[var(--color-text-muted)] text-center`}>
         Same-day or next-day assessments available. Your info stays private —
         we never share it.
       </p>
