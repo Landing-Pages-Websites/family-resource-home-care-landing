@@ -7,13 +7,20 @@ import type { Territory } from "./Brand";
 
 interface HeroProps {
   territory: Territory;
+  /** Portland West only: prioritize the hero form so its submit control is
+   *  fully visible in the initial viewport at mobile + desktop targets. */
+  compact?: boolean;
 }
 
-export function Hero({ territory }: HeroProps) {
+export function Hero({ territory, compact = false }: HeroProps) {
   return (
     <section
       id="hero"
-      className="relative pt-24 sm:pt-28 lg:pt-32 pb-14 sm:pb-20 overflow-hidden bg-[var(--color-primary)] text-white"
+      className={`relative overflow-hidden bg-[var(--color-primary)] text-white ${
+        compact
+          ? "pt-24 sm:pt-28 lg:pt-24 pb-14 sm:pb-16"
+          : "pt-24 sm:pt-28 lg:pt-32 pb-14 sm:pb-20"
+      }`}
     >
       {/* Background caregiver photo, gently dimmed */}
       <div aria-hidden className="absolute inset-0 pointer-events-none">
@@ -36,9 +43,15 @@ export function Hero({ territory }: HeroProps) {
         }}
       />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+      <div
+        className={`relative max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-12 ${
+          compact
+            ? "gap-8 lg:gap-10 items-start"
+            : "gap-10 lg:gap-12 items-center"
+        }`}
+      >
         {/* Left: copy column */}
-        <div className="lg:col-span-7">
+        <div className={compact ? "order-2 lg:order-1 lg:col-span-7" : "lg:col-span-7"}>
           <Reveal variant="up">
             <span className="inline-flex items-center gap-2 rounded-full border border-[var(--color-accent)]/40 bg-[var(--color-accent)]/10 backdrop-blur px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--color-accent)]">
               <span className="w-2 h-2 rounded-full bg-[var(--color-accent)] animate-pulse" />
@@ -164,7 +177,7 @@ export function Hero({ territory }: HeroProps) {
         </div>
 
         {/* Right: Form card */}
-        <div className="lg:col-span-5">
+        <div className={compact ? "order-1 lg:order-2 lg:col-span-5" : "lg:col-span-5"}>
           <Reveal variant="right" delay={120}>
             <div className="relative">
               <div className="hidden lg:flex absolute -top-4 -right-4 z-20 items-center gap-2 bg-[var(--color-cta)] text-white rounded-xl shadow-xl px-3.5 py-2.5">
@@ -195,6 +208,7 @@ export function Hero({ territory }: HeroProps) {
               <LeadForm
                 territory={territory}
                 variant="hero"
+                compact={compact}
                 headline="Request Your Free In-Home Assessment"
                 subhead="Same-day or next-day visits available — we'll listen, answer questions, and help you decide if care is right for your loved one."
               />
