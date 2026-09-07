@@ -48,7 +48,9 @@ export function Hero({ territory }: HeroProps) {
 
           <Reveal variant="up" delay={80}>
             <h1 className="mt-5 text-4xl sm:text-5xl lg:text-[3.4rem] font-extrabold leading-[1.05] text-white">
-              Compassionate In-Home Care in{" "}
+              Compassionate{" "}
+              {territory.id === "oregon-city" ? "Senior " : ""}In-Home Care in
+              {" "}
               <span className="text-[var(--color-accent)]">
                 {territory.name}
               </span>
