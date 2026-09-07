@@ -391,6 +391,9 @@ export function LeadForm({
   const noteMt = compact ? "mt-2.5" : "mt-3";
   const headWrap = compact ? "mb-4" : "mb-5 sm:mb-6";
   const headText = compact ? "text-lg sm:text-xl" : "text-xl sm:text-2xl";
+  // Pair fields below sm in compact mode so the submit clears the mobile chat
+  // prompt; the default branch remains byte-for-byte unchanged.
+  const pairCols = compact ? "grid-cols-2" : "grid-cols-1 sm:grid-cols-2";
 
   return (
     <form
@@ -421,7 +424,7 @@ export function LeadForm({
         </div>
       )}
 
-      <div className={`grid grid-cols-1 sm:grid-cols-2 ${fieldGap}`}>
+      <div className={`grid ${pairCols} ${fieldGap}`}>
         <div>
           <label htmlFor={id("firstName")} className="sr-only">
             First name
@@ -526,7 +529,7 @@ export function LeadForm({
         )}
       </div>
 
-      <div className={`${rowGap} grid grid-cols-1 sm:grid-cols-2 ${fieldGap}`}>
+      <div className={`${rowGap} grid ${pairCols} ${fieldGap}`}>
         <div>
           <label htmlFor={id("phone")} className="sr-only">
             Phone
