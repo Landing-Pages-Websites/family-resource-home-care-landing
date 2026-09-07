@@ -379,18 +379,27 @@ export function LeadForm({
 
   const showErr = (k: FieldKey) => Boolean(touched[k] && errors[k]);
   const inputCls = (k: FieldKey) =>
-    `lp-input ${showErr(k) ? "lp-input-error" : ""}`;
+    `lp-input ${compact ? "lp-input-compact" : ""} ${
+      showErr(k) ? "lp-input-error" : ""
+    }`;
 
   // Portland West hero packs a seven-field form into a short viewport, so the
   // compact variant tightens the vertical rhythm while keeping every field and
-  // ≥44px touch targets intact.
+  // ≥44px touch targets intact. The extra tightening here lifts the submit
+  // above the mobile chat prompt at 390×844; the default branch is unchanged.
+  const cardPad = compact ? "p-4 sm:p-8" : "p-6 sm:p-8";
   const fieldGap = compact ? "gap-2.5" : "gap-3";
   const rowGap = compact ? "mt-2.5" : "mt-3";
-  const groupGap = compact ? "mt-3" : "mt-4";
-  const submitMt = compact ? "mt-4" : "mt-5";
+  const groupGap = compact ? "mt-2.5" : "mt-4";
+  const submitMt = compact ? "mt-3" : "mt-5";
   const noteMt = compact ? "mt-2.5" : "mt-3";
-  const headWrap = compact ? "mb-4" : "mb-5 sm:mb-6";
+  const headWrap = compact ? "mb-3" : "mb-5 sm:mb-6";
   const headText = compact ? "text-lg sm:text-xl" : "text-xl sm:text-2xl";
+  // Compact submit stays one line (≥44px tall) so it clears the chat prompt;
+  // default keeps its larger type and padding.
+  const submitSize = compact
+    ? "text-sm sm:text-lg py-3 min-h-[44px]"
+    : "text-base sm:text-lg py-3.5";
   // Pair fields below sm in compact mode so the submit clears the mobile chat
   // prompt; the default branch remains byte-for-byte unchanged.
   const pairCols = compact ? "grid-cols-2" : "grid-cols-1 sm:grid-cols-2";
@@ -400,7 +409,7 @@ export function LeadForm({
       ref={formRef}
       onSubmit={handleNativeSubmit}
       noValidate
-      className={`relative rounded-2xl p-6 sm:p-8 ${
+      className={`relative rounded-2xl ${cardPad} ${
         variant === "hero"
           ? "bg-white shadow-2xl border border-[var(--color-border)]"
           : "bg-white shadow-lg border border-[var(--color-border)]"
@@ -686,9 +695,9 @@ export function LeadForm({
             onChange={(e) =>
               update("heardFrom", e.target.value as HeardFromValue)
             }
-            className={`lp-input appearance-none pr-10 ${
-              !data.heardFrom ? "text-[#6b7280]" : ""
-            }`}
+            className={`lp-input ${
+              compact ? "lp-input-compact" : ""
+            } appearance-none pr-10 ${!data.heardFrom ? "text-[#6b7280]" : ""}`}
           >
             {HEARD_FROM_OPTIONS.map((opt) => (
               <option
@@ -734,7 +743,7 @@ export function LeadForm({
         type="button"
         onClick={handleClick}
         disabled={submitting || success}
-        className={`btn-primary w-full ${submitMt} text-base sm:text-lg py-3.5 disabled:opacity-60 disabled:cursor-not-allowed`}
+        className={`btn-primary w-full ${submitMt} ${submitSize} disabled:opacity-60 disabled:cursor-not-allowed`}
       >
         {submitting ? "Sending…" : "Request My Free In-Home Assessment"}
       </button>
