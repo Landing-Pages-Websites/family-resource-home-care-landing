@@ -33,7 +33,11 @@ export function TerritoryPage({ territoryId }: TerritoryPageProps) {
       <Header territory={territory} />
       <Hero
         territory={territory}
-        compact={territoryId === "portland-west" || territoryId === "gresham"}
+        compact={
+          territoryId === "portland-west" ||
+          territoryId === "gresham" ||
+          territoryId === "oregon-city"
+        }
       />
       <Stats />
       <PhotoBand territory={territory} />
