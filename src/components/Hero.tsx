@@ -63,11 +63,12 @@ export function Hero({ territory, compact = false }: HeroProps) {
             <h1 className="mt-5 text-4xl sm:text-5xl lg:text-[3.4rem] font-extrabold leading-[1.05] text-white">
               Compassionate{" "}
               {territory.id === "oregon-city" ||
-              territory.id === "portland-east" ||
-              territory.id === "portland-west"
+              territory.id === "portland-east"
                 ? "Senior "
                 : ""}
-              In-Home Care in{" "}
+              In-Home{" "}
+              {territory.id === "portland-west" ? "Senior " : ""}
+              Care in{" "}
               <span className="text-[var(--color-accent)]">
                 {territory.name}
               </span>
