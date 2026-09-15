@@ -62,7 +62,9 @@ export function Hero({ territory, compact = false }: HeroProps) {
           <Reveal variant="up" delay={80}>
             <h1 className="mt-5 text-4xl sm:text-5xl lg:text-[3.4rem] font-extrabold leading-[1.05] text-white">
               Compassionate{" "}
-              {territory.id === "oregon-city" || territory.id === "portland-east"
+              {territory.id === "oregon-city" ||
+              territory.id === "portland-east" ||
+              territory.id === "portland-west"
                 ? "Senior "
                 : ""}
               In-Home Care in{" "}
