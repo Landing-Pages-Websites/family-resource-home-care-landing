@@ -62,13 +62,24 @@ export function Hero({ territory, compact = false }: HeroProps) {
           <Reveal variant="up" delay={80}>
             <h1 className="mt-5 text-4xl sm:text-5xl lg:text-[3.4rem] font-extrabold leading-[1.05] text-white">
               Compassionate{" "}
-              {territory.id === "oregon-city" ? "Senior " : ""}In-Home Care in
-              {" "}
+              {territory.id === "oregon-city" || territory.id === "portland-east"
+                ? "Senior "
+                : ""}
+              In-Home Care in{" "}
               <span className="text-[var(--color-accent)]">
                 {territory.name}
               </span>
             </h1>
           </Reveal>
+
+          {territory.id === "portland-east" ? (
+            <Reveal variant="up" delay={110}>
+              <p className="mt-4 text-base sm:text-lg text-white/80 max-w-2xl leading-relaxed">
+                A local senior care agency serving Portland East, Clackamas,
+                Milwaukie, Gladstone, Happy Valley &amp; Southeast Portland.
+              </p>
+            </Reveal>
+          ) : null}
 
           <Reveal variant="up" delay={140}>
             <p className="mt-5 text-lg sm:text-xl text-white/85 max-w-2xl leading-relaxed">
