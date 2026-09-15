@@ -7,7 +7,7 @@ import type { Territory } from "./Brand";
 
 interface HeroProps {
   territory: Territory;
-  /** Portland West only: prioritize the hero form so its submit control is
+  /** Portland West + Gresham: prioritize the hero form so its submit control is
    *  fully visible in the initial viewport at mobile + desktop targets. */
   compact?: boolean;
 }

@@ -31,7 +31,10 @@ export function TerritoryPage({ territoryId }: TerritoryPageProps) {
     <main className="bg-white">
       <QueryParamPersistence />
       <Header territory={territory} />
-      <Hero territory={territory} compact={territoryId === "portland-west"} />
+      <Hero
+        territory={territory}
+        compact={territoryId === "portland-west" || territoryId === "gresham"}
+      />
       <Stats />
       <PhotoBand territory={territory} />
       <Welcome territory={territory} />

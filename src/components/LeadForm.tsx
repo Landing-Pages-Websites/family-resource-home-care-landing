@@ -18,7 +18,7 @@ interface LeadFormProps {
   territory: Territory;
   variant?: "hero" | "contact";
   /** Tightens internal spacing so the submit control fits the initial
-   *  viewport. Used by the Portland West hero only. */
+   *  viewport. Used by the Portland West and Gresham heroes. */
   compact?: boolean;
   headline?: string;
   subhead?: string;
@@ -383,10 +383,10 @@ export function LeadForm({
       showErr(k) ? "lp-input-error" : ""
     }`;
 
-  // Portland West hero packs a seven-field form into a short viewport, so the
-  // compact variant tightens the vertical rhythm while keeping every field and
-  // ≥44px touch targets intact. The extra tightening here lifts the submit
-  // above the mobile chat prompt at 390×844; the default branch is unchanged.
+  // The compact heroes (Portland West + Gresham) pack a seven-field form into a
+  // short viewport, so the compact variant tightens the vertical rhythm while
+  // keeping every field and ≥44px touch targets intact. The extra tightening
+  // here lifts the submit above the mobile chat prompt; the default is unchanged.
   const cardPad = compact ? "p-4 sm:p-8" : "p-6 sm:p-8";
   const fieldGap = compact ? "gap-2.5" : "gap-3";
   const rowGap = compact ? "mt-2.5" : "mt-3";
