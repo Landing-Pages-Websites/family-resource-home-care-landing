@@ -377,6 +377,12 @@ export function LeadForm({
     );
   }
 
+  // Portland East hero only: place the submit control immediately after the
+  // required ready-to-receive-care group and before the optional referral
+  // select. Every other territory/variant keeps submit-after-optional-field.
+  const submitBeforeOptional =
+    territory.id === "portland-east" && variant === "hero";
+
   const showErr = (k: FieldKey) => Boolean(touched[k] && errors[k]);
   const inputCls = (k: FieldKey) =>
     `lp-input ${compact ? "lp-input-compact" : ""} ${
@@ -403,6 +409,18 @@ export function LeadForm({
   // Pair fields below sm in compact mode so the submit clears the mobile chat
   // prompt; the default branch remains byte-for-byte unchanged.
   const pairCols = compact ? "grid-cols-2" : "grid-cols-1 sm:grid-cols-2";
+
+  // Single submit control, reused across placements — never duplicated.
+  const submitButton = (
+    <button
+      type="button"
+      onClick={handleClick}
+      disabled={submitting || success}
+      className={`btn-primary w-full ${submitMt} ${submitSize} disabled:opacity-60 disabled:cursor-not-allowed`}
+    >
+      {submitting ? "Sending…" : "Request My Free In-Home Assessment"}
+    </button>
+  );
 
   return (
     <form
@@ -672,6 +690,8 @@ export function LeadForm({
         )}
       </div>
 
+      {submitBeforeOptional && submitButton}
+
       {/* Q2 — How did you hear about us? (optional) */}
       <div className={groupGap}>
         <label
@@ -739,14 +759,7 @@ export function LeadForm({
         </div>
       )}
 
-      <button
-        type="button"
-        onClick={handleClick}
-        disabled={submitting || success}
-        className={`btn-primary w-full ${submitMt} ${submitSize} disabled:opacity-60 disabled:cursor-not-allowed`}
-      >
-        {submitting ? "Sending…" : "Request My Free In-Home Assessment"}
-      </button>
+      {!submitBeforeOptional && submitButton}
 
       <p className={`${noteMt} text-[11px] sm:text-xs leading-relaxed text-[var(--color-text-muted)] text-center`}>
         Same-day or next-day assessments available. Your info stays private —
