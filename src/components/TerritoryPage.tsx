@@ -36,7 +36,8 @@ export function TerritoryPage({ territoryId }: TerritoryPageProps) {
         compact={
           territoryId === "portland-west" ||
           territoryId === "gresham" ||
-          territoryId === "oregon-city"
+          territoryId === "oregon-city" ||
+          territoryId === "hillsboro"
         }
       />
       <Stats />
