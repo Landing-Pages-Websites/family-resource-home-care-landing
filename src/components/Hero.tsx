@@ -224,7 +224,11 @@ export function Hero({ territory, compact = false }: HeroProps) {
                 variant="hero"
                 compact={compact}
                 headline="Request Your Free In-Home Assessment"
-                subhead="Same-day or next-day visits available — we'll listen, answer questions, and help you decide if care is right for your loved one."
+                subhead={`Same-day or next-day visits available — we'll listen, answer questions, and help you decide if care is right for your loved one.${
+                  territory.id === "oregon-city"
+                    ? " Personalized in-home care assistance for seniors and families in Oregon City."
+                    : ""
+                }`}
               />
             </div>
           </Reveal>
