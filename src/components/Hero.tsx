@@ -94,8 +94,17 @@ export function Hero({ territory, compact = false }: HeroProps) {
 
           <Reveal variant="up" delay={140}>
             <p className="mt-5 text-lg sm:text-xl text-white/85 max-w-2xl leading-relaxed">
-              Our caregivers help your loved one stay safe, comfortable, and
-              independent at home across {territory.region}.{" "}
+              {territory.id === "portland-west" ? (
+                <>
+                  Our local home care agency helps your loved one stay safe,
+                  comfortable, and independent at home across {territory.region}.
+                </>
+              ) : (
+                <>
+                  Our caregivers help your loved one stay safe, comfortable, and
+                  independent at home across {territory.region}.
+                </>
+              )}{" "}
               <span className="text-white font-semibold">
                 Free in-home assessment available same day or next day
               </span>{" "}
