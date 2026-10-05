@@ -84,6 +84,14 @@ export function Hero({ territory, compact = false }: HeroProps) {
             </Reveal>
           ) : null}
 
+          {territory.id === "portland-east" ? (
+            <Reveal variant="up" delay={125}>
+              <p className="mt-3 text-base sm:text-lg text-white/90 max-w-2xl leading-relaxed">
+                Respite care for Portland East families.
+              </p>
+            </Reveal>
+          ) : null}
+
           <Reveal variant="up" delay={140}>
             <p className="mt-5 text-lg sm:text-xl text-white/85 max-w-2xl leading-relaxed">
               Our caregivers help your loved one stay safe, comfortable, and
