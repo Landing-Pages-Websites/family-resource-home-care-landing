@@ -99,6 +99,12 @@ export function Hero({ territory, compact = false }: HeroProps) {
                   Our local home care agency helps your loved one stay safe,
                   comfortable, and independent at home across {territory.region}.
                 </>
+              ) : territory.id === "oregon-city" ? (
+                <>
+                  Our local home care agency and caregivers help your loved one
+                  stay safe, comfortable, and independent at home across{" "}
+                  {territory.region}.
+                </>
               ) : (
                 <>
                   Our caregivers help your loved one stay safe, comfortable, and
