@@ -184,7 +184,7 @@ export const TERRITORIES: Record<TerritoryId, Territory> = {
     branchEmail: "hillsboro@familyrhc.com",
     referenceUrl:
       "https://www.familyresourcehomecare.com/locations/hillsboro-or/",
-    heroPattern: "Serving Hillsboro & Washington County",
+    heroPattern: "Local home care agency serving Hillsboro & Washington County",
     metaTitle:
       "In-Home Care in Hillsboro | Forest Grove, Cornelius & St. Helens | Family Resource Home Care",
     metaDescription:
