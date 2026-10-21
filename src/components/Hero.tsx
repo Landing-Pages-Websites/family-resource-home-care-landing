@@ -105,6 +105,12 @@ export function Hero({ territory, compact = false }: HeroProps) {
                   stay safe, comfortable, and independent at home across{" "}
                   {territory.region}.
                 </>
+              ) : territory.id === "gresham" ? (
+                <>
+                  Our caregivers provide home care assistance that helps your
+                  loved one stay safe, comfortable, and independent at home
+                  across {territory.region}.
+                </>
               ) : (
                 <>
                   Our caregivers help your loved one stay safe, comfortable, and
