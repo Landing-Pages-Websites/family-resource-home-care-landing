@@ -234,7 +234,7 @@ export const TERRITORIES: Record<TerritoryId, Territory> = {
     branchEmail: "gresham@familyrhc.com",
     referenceUrl:
       "https://www.familyresourcehomecare.com/locations/home-care-in-gresham/",
-    heroPattern: "Serving Gresham & East Multnomah County",
+    heroPattern: "Local home care agency serving Gresham & East Multnomah County",
     metaTitle:
       "In-Home Care in Gresham | Troutdale, Fairview & Sandy | Family Resource Home Care",
     metaDescription:
