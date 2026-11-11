@@ -126,7 +126,8 @@ export function Hero({ territory, compact = false }: HeroProps) {
                 <>
                   Our caregivers provide home care assistance that helps your
                   loved one stay safe, comfortable, and independent at home
-                  across {territory.region}.
+                  across Gresham, Troutdale, Fairview and Sandy, plus Damascus
+                  and East SE Portland.
                 </>
               ) : (
                 <>
@@ -135,9 +136,17 @@ export function Hero({ territory, compact = false }: HeroProps) {
                 </>
               )}{" "}
               <span className="text-white font-semibold">
-                Free in-home assessment available same day or next day
-              </span>{" "}
-              — no pressure, no obligation.
+                {isGresham
+                  ? "Free in-home assessment available the same or next day"
+                  : "Free in-home assessment available same day or next day"}
+              </span>
+              {isGresham ? (
+                ". No pressure, no obligation."
+              ) : (
+                <>
+                  {" "}— no pressure, no obligation.
+                </>
+              )}
             </p>
           </Reveal>
 
