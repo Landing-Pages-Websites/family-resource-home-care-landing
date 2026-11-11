@@ -134,7 +134,7 @@ export const TERRITORIES: Record<TerritoryId, Territory> = {
     branchEmail: "portlandwest@familyrhc.com",
     referenceUrl:
       "https://www.familyresourcehomecare.com/locations/portland-west-or/",
-    heroPattern: "Serving SW Portland & Westside Communities",
+    heroPattern: "LOCAL HOME CARE AGENCY & CAREGIVERS FOR SW PORTLAND & WESTSIDE",
     metaTitle:
       "In-Home Care in Portland West | Beaverton, Lake Oswego & Tualatin | Family Resource Home Care",
     metaDescription:
