@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import type { ReactNode } from "react";
 import { LeadForm } from "./LeadForm";
 import { Reveal } from "./Reveal";
 import type { Territory } from "./Brand";
@@ -12,7 +13,16 @@ interface HeroProps {
   compact?: boolean;
 }
 
+/** Gresham: tighter H1 top margin at 1024–1279px only, so the hero copy column
+ *  lines up with the form; 20px everywhere else. */
+const GRESHAM_H1_MARGIN = "mt-5 lg:mt-4 xl:mt-5";
+
 export function Hero({ territory, compact = false }: HeroProps) {
+  const isGresham = territory.id === "gresham";
+  /** Gresham only: keep a heading phrase on one line; siblings render as-is. */
+  const noWrap = (node: ReactNode): ReactNode =>
+    isGresham ? <span className="whitespace-nowrap">{node}</span> : node;
+
   return (
     <section
       id="hero"
@@ -60,23 +70,25 @@ export function Hero({ territory, compact = false }: HeroProps) {
           </Reveal>
 
           <Reveal variant="up" delay={80}>
-            <h1 className="mt-5 text-4xl sm:text-5xl lg:text-[3.4rem] font-extrabold leading-[1.05] text-white">
+            <h1
+              className={`${isGresham ? GRESHAM_H1_MARGIN : "mt-5"} text-4xl sm:text-5xl lg:text-[3.4rem] font-extrabold leading-[1.05] text-white`}
+            >
               Compassionate{" "}
               {territory.id === "hillsboro" ||
               territory.id === "oregon-city" ||
               territory.id === "portland-east"
                 ? "Senior "
                 : ""}
-              {territory.id === "gresham" ? (
-                <span className="whitespace-nowrap">In-Home</span>
-              ) : (
-                "In-Home"
-              )}{" "}
+              {noWrap("In-Home")}{" "}
               {territory.id === "portland-west" ? "Senior " : ""}
-              Care in{" "}
-              <span className="text-[var(--color-accent)]">
-                {territory.name}
-              </span>
+              {noWrap(
+                <>
+                  Care in{" "}
+                  <span className="text-[var(--color-accent)]">
+                    {territory.name}
+                  </span>
+                </>,
+              )}
             </h1>
           </Reveal>
 
