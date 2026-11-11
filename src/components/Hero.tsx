@@ -67,7 +67,11 @@ export function Hero({ territory, compact = false }: HeroProps) {
               territory.id === "portland-east"
                 ? "Senior "
                 : ""}
-              In-Home{" "}
+              {territory.id === "gresham" ? (
+                <span className="whitespace-nowrap">In-Home</span>
+              ) : (
+                "In-Home"
+              )}{" "}
               {territory.id === "portland-west" ? "Senior " : ""}
               Care in{" "}
               <span className="text-[var(--color-accent)]">
