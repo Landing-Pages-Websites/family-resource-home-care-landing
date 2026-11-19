@@ -1,9 +1,12 @@
 // Visitor copy shared by the four market routes. Sources: research page_blueprint.json
-// copy_direction, service_copy.json, faq_provenance.json and proof.json for task 68e909bd.
+// copy_direction, service_copy.json, faq_provenance.json and proof.json for task 68e909bd; the
+// first stat, the testimonials and the minimum-visit answer follow human send-back f79bba62
+// (task 1293b210, see PROVENANCE.md).
 // Hyphenated words in headings, buttons and chips use U+2011 so they never break at the hyphen.
 
 import { FORM_ANCHOR, SITE } from "@/site";
 import type { MarketIconName } from "./components/MarketIcon";
+import type { MarketId } from "./markets";
 
 export const PRIVACY_URL = SITE.privacyUrl;
 export const PRIMARY_CTA = "Get My Free Assessment";
@@ -35,7 +38,11 @@ export const PAYMENT_TRUST = "Medicaid · VA · Private Pay";
 export const OWNERSHIP_TRUST = "Independently owned";
 
 export const STATS = [
-  { value: "Independently", label: "Owned", sub: "Not a franchise, with caregivers backed by our local team." },
+  {
+    value: "50+",
+    label: "Years of History",
+    sub: "One of the largest independently owned home care agencies in the country, not a franchise.",
+  },
   { value: "Same Day", label: "Assessments", sub: "Free in\u2011home visits available today or tomorrow, with no obligation." },
   {
     value: "24/7",
@@ -138,24 +145,54 @@ export const PAYMENT_OPTIONS = [
   "Long\u2011term care insurance",
 ] as const;
 
-/** Verbatim (the middle one an unaltered excerpt), with each note's true region and year. The short
- * note sits in the middle so the row is balanced, and the Spokane credit never closes it. */
-export const TESTIMONIALS = [
+export interface Testimonial {
+  quote: string;
+  name: string;
+  year: string;
+  initials: string;
+}
+
+// Excerpts as supplied in the human send-back; "…" marks each cut from the customer's review.
+const SALEM_REVIEW: Testimonial = {
+  quote:
+    "Staff at the Salem office are helpful, friendly, knowledgeable, polite and professional. … I applaud the staff for having all the qualities for this work: both the office people and the front\u2011line employees. Thank you for doing what you do.",
+  name: "Salem Client",
+  year: "2026",
+  initials: "SC",
+};
+
+const ROSEBURG_REVIEW: Testimonial = {
+  quote:
+    "We finally found the right company after 16 years. The staff is great. … They actually check on us and make sure that my wife's needs are being met. They care and it shows! We have two fantastic caregivers. Both Sherree and Cary actually care about my wife and treat her like she's a person.",
+  name: "Roseburg Husband of Client",
+  year: "2026",
+  initials: "RH",
+};
+
+const SPOUSE_REVIEW: Testimonial = {
+  quote:
+    "Other agencies just hire anyone who wants a job and they don't communicate as well. I can tell that Family Resource is not just doing this for the money. They are one of the very best agencies we've ever dealt with. … The communication has been excellent and they're very quick to call us back if we call them.",
+  name: "Spouse of Client",
+  year: "2024",
+  initials: "SC",
+};
+
+/** The first card each market's families read, credited to the reviewer's own region and year. */
+const FIRST_REVIEW: Record<MarketId, Testimonial> = {
+  salem: SALEM_REVIEW,
+  "grants-pass": ROSEBURG_REVIEW,
+  medford: ROSEBURG_REVIEW,
+  olympia: SPOUSE_REVIEW,
+};
+
+/** Cards two and three on every route; the Vanessa note is verbatim. */
+const SHARED_REVIEWS: readonly Testimonial[] = [
   {
     quote:
-      "I would like to share a huge compliment for the amazing care our family received from Family Resource Home Care. The caregiver who supported our loved one was compassionate, dependable, and truly went above and beyond. Her kindness and professionalism made a meaningful difference during an important time for our family. Thank you to the Spokane team for providing such wonderful support and service.",
-    name: "Spokane Family Member of Client",
-    year: "2026",
-    initials: "SF",
-    excerpt: false,
-  },
-  {
-    quote:
-      "The transition from independent living to needing assistance in my home has been made easier by their tact and professionalism. Thank you so much.",
+      "I am no longer skipping meals because I'm too tired to prepare them. I can take walks with them and am going farther and feeling stronger than before. … The transition from independent living to needing assistance in my home has been made easier by their tact and professionalism.",
     name: "Family Resource Client",
     year: "2025",
     initials: "FR",
-    excerpt: true,
   },
   {
     quote:
@@ -163,14 +200,18 @@ export const TESTIMONIALS = [
     name: "Portland East Client",
     year: "2026",
     initials: "PE",
-    excerpt: false,
   },
-] as const;
+];
+
+/** The three testimonial cards for one market route, in page order. */
+export function marketTestimonials(id: MarketId): readonly Testimonial[] {
+  return [FIRST_REVIEW[id], ...SHARED_REVIEWS];
+}
 
 export const FAQS = [
   {
     q: "What is the minimum visit length?",
-    a: "Our minimum shift is two to four hours, depending on the branch. Your local team can explain the visit length for your area.",
+    a: "Our minimum shift is two to four hours, depending on the branch.",
   },
   {
     q: "How much does care cost?",

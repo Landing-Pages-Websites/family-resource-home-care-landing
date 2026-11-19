@@ -170,3 +170,28 @@ Independent QA (comment ab9dfbaf, bounded by 835fb063, 2026-11-19; attempt 2/3) 
   clear of the photo); this keeps the canonical column gap clear. Without the pair the
   column would end 140-145px above the photo. `#service-area`: the address card spans the office card
   and the pair is centered below it. Below 1024px both sections render exactly as before.
+
+## Proof, testimonial and FAQ send-back (task 1293b210)
+
+Human send-back: https://admin.gomega.ai/tasks/f79bba62-9e13-4703-bd45-7bdb3cece492 `qa_failure_reason`.
+It supersedes only the first trust-strip stat, the first two testimonial cards and the first FAQ
+answer on all four routes. Everything else above stays in force.
+
+| Element | Now | Superseded (task 68e909bd) | Source |
+| --- | --- | --- | --- |
+| Stat 1 | "50+" / "Years of History" / "One of the largest independently owned home care agencies in the country, not a franchise." | "Independently" / "Owned" / "Not a franchise, with caregivers backed by our local team." | FAQ `#collapse-1-8525` ("history spans more than 50 years, with roots in several long-established, family-owned home care agencies"; the current organization took shape in 2018, so this is history, not entity age) and `#collapse-1-8540` ("one of the largest independently-owned home care agencies in the country") |
+| Card 1 | Per market: /salem "Salem Client", 2026 (SC); /grants-pass and /medford "Roseburg Husband of Client", 2026 (RH); /olympia "Spouse of Client", 2024 (SC) | Spokane Family Member of Client, 2026, on every route | Testimonials page, credited there as "Happy Salem Client, 2026", "Happy Roseburg Husband of Client, 2026", "Spouse of Client, 2024" |
+| Card 2 | "I am no longer skipping meals … tact and professionalism." (Family Resource Client, 2025) | Closing excerpt with an automatic leading "…" | Testimonials page, "Happy Client, 2025" |
+| FAQ 1 answer | "Our minimum shift is two to four hours, depending on the branch." | Same plus "Your local team can explain the visit length for your area." | FAQ `#collapse-1-8527` |
+
+- Sources: https://www.familyresourcehomecare.com/how-we-help/frequently-asked-questions/ and
+  https://www.familyresourcehomecare.com/about/awards-reviews-testimonials/testimonials/ (both read
+  2026-11-19). Excerpt wording is the human's exact text: "…" marks each cut (one per quote), the
+  apostrophes are as supplied, and Salem's "front‑line" uses U+2011 so it never splits at the hyphen.
+  Locality credits are the reviewers' own (Roseburg, no city for the spouse); they are not swapped
+  for the route's market. Card 3 (Vanessa, Portland East Client, 2026) is unchanged.
+- `TestimonialCard` no longer adds a leading ellipsis (the `excerpt` flag is gone). The first card
+  comes from `marketTestimonials(market.id)` in `content.ts`.
+- The hero ownership line ("Independently owned") and the other three stats are unchanged. The
+  trust-strip value scale above stays as measured for "Independently"; "50+" is narrower.
+- No layout, class, image, form, phone, CTA or tracking change.
