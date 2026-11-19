@@ -1,0 +1,94 @@
+# Market routes provenance (task 68e909bd)
+
+`/salem`, `/grants-pass`, `/medford` and `/olympia` are additive. They mirror the approved
+Portland template (sections, classes, palette, Manrope/Inter) through opt-in components in
+`src/markets/**`, with the current new-surface corrections listed under "Required new-route
+corrections" below (so the new pages are not a byte-for-byte copy of the template geometry). No pre-existing file is modified; the root and five Portland routes still
+render through `src/components/TerritoryPage.tsx` and the legacy `LeadForm`.
+
+## Canonical form modules (lp-starter `e8e8d9b5c8cd4be6d65818a914c33edecdbeed69`)
+
+Byte-identical copies:
+
+- `src/lib/{attribution,conditions,currency,date,domain,fields,leadPayload,managedSubmit,multiSelect,prepareSubmissionValues,qualification,reservedFields,successRedirect,textarea,waivers,zip}.ts`
+  (`fields.ts` SHA-256 `d25400ba6ee08423f81f50a3dda98d6bd8d110952edfd99f0618799aeeedfe89`)
+- `src/hooks/useLeadFormFlow.ts`, `src/components/formErrorMessage.ts`, `test/fixtures/site.ts`
+- Tests: `src/lib/{fields,zip,attribution,qualification,leadPayload,conversionEvents,optionalFields,reservedFields}.test.ts`,
+  `src/components/formErrorMessage.test.ts`
+
+Documented deviations:
+
+- `src/lib/conversionEvents.ts`: the `declare global` block is omitted, because the legacy
+  `src/components/LeadForm.tsx` already declares `Window.MegaTag`/`dataLayer` with another type.
+- `src/lib/managedSubmit.test.ts`: the "lead form wiring" block reads the market controller and
+  form instead of the starter-only `useLeadFormController.ts` / `LeadForm.tsx` / `SubmitButton.tsx`.
+- `src/site.ts`: starter types and constants verbatim; `SITE` is FRHC's, reading its ids from `Brand.ts`.
+- `src/markets/useMarketLeadForm.ts` and `useMarketLeadController.ts` are adapters of the
+  starter `useMegaLeadForm.ts` / `useLeadFormController.ts` (the legacy hook of that name must stay
+  for the Portland routes). Same logic, plus per-market `territory*` form_data keys and the
+  `qualified_lead` signal after an accepted ready lead.
+- `src/markets/formEvents.ts`: its small never-throw `attempt()` wrapper repeats the private helper in
+  `src/lib/conversionEvents.ts`, which stays byte-identical to the starter and does not export it.
+
+Run the unit tests with `npx tsx --test "src/**/*.test.ts"` (no package.json change).
+
+## Images (`public/images/markets/`)
+
+Re-encoded to WebP q85 from first-party originals recovered for this task; never upscaled.
+
+| File | Slot | Source (familyresourcehomecare.com uploads) | Source px | File px |
+| --- | --- | --- | --- | --- |
+| `frhc-hug-moment.webp` | hero backdrop | `2023/10/K4A2552-1.jpg` (sha256 `167ab4bf…`) | 5304×3536 | 3840×2560 |
+| `frhc-bench-visit.webp` | photo band | `2023/11/FRHCAbout2-1.webp` (sha256 `967fbb27…`) | 2049×1652 | 2049×1652 |
+| `frhc-park-walk.webp` | welcome | `2021/09/A-Paycheck-with-a-Purpose_06.jpg` (sha256 `2b18dcfd…`) | 1600×1067 | 1600×1067 |
+| `frhc-garden-visit.webp` | story | `2019/04/fam-home-banner.jpg` (sha256 `6aa73e96…`) | 1400×768 | 1400×768 |
+
+Slot ratios and `sizes` are set so every delivered file holds 2x density from 320px to 1728px.
+
+The template's dimmed how-it-works backdrop photo is not used. `Family-Resource-Home-Care-Hero_01.jpg`
+and `FRHCAbout2-1.webp` are the same bench scene (same people and outfits), and the only other
+originals with full-bleed pixels (`K4A2552-1.jpg`) already fill the hero, so the band keeps its navy
+wash and stripes without a repeated scene. Below 1024px the hero backdrop is a band at the photo's
+own proportions fading into the navy (a full cover of the tall stacked hero would need more source
+height than the original has); section geometry is unchanged.
+These are company photos, not pictures of a market office; alt text never names a city.
+
+## Hero proof amendment (controller-authorized, round 2)
+
+The round-1 design review found the template's hero trust row missing and the same-day offer and
+"independently owned" repeated across the hero chips, badge, form and stats. The controller
+authorized a bounded amendment of the new-route hero chips and trust row only (the H1, agency
+sentence, offer sentence, form copy, badge and stats are unchanged). Each point now appears once
+per screen:
+
+| Element | Copy | Source |
+| --- | --- | --- |
+| Hero chip (kept) | Personalized care plan | https://www.familyresourcehomecare.com/how-we-help/frequently-asked-questions/#collapse-1-8537 |
+| Hero chip (kept) | Caregivers matched to your loved one | research `page_blueprint.json` hero copy (task positioning) |
+| Hero chip (new) | Trained caregivers we employ directly | FAQ `#collapse-1-8543` (classroom and on-site training) and `#collapse-1-8532` ("Our caregivers are our employees") |
+| Hero chip (new) | Visits from a few hours to 24‑hour care | FAQ `#collapse-1-8527` (two-to-four-hour minimum by branch) and https://www.familyresourcehomecare.com/home-care-services/overnight-24-7-care/ |
+| Trust row, 1024px+ | Payment accepted: Medicaid · VA · Private Pay | FAQ `#collapse-1-8531` (state Medicaid programs, Veterans Administration); same categories as the page's Payment Options block |
+| Trust line under the compact submit, below 1024px | Independently owned · Medicaid · VA · Private Pay | FAQ `#collapse-1-8540` ("one of the largest independently-owned home care agencies"; not a franchise) and `#collapse-1-8531` |
+
+Removed from the chips: "Free same/next‑day assessment" (kept in the hero sentence, badge and stats)
+and "Independently owned" (kept in the stats strip and, on phones, the trust line). No stars, award
+or "Open 7 days" claim is shown: none is verified for these branches.
+
+## Required new-route corrections (controller gates, round 2)
+
+Current form, conversion and floating-CTA rules apply to these new surfaces even where the template
+differs (WEB Director decision 1f376687). Old routes and shared CSS are untouched; every change below
+lives in `src/markets/**`.
+
+- **Controls:** 2px input/select borders in `#7d8797` (3.63:1 on white; the template's 1px `#dbe0e8`
+  was 1.33:1), scoped in `market.css`; readiness options use the same colour. Focus and error borders
+  are unchanged.
+- **Section endings:** `PhotoBand` (its single CTA replaced), `Services`, `WhyUs` and `Testimonials`
+  now end with the form CTA and phone pair (`CtaPair`) to `#form`, like the template's other content
+  sections. These add one button row of height to each of those sections. The stats strip is a trust
+  fragment and the final form section ends with its form, so neither gets a pair.
+- **Floating CTA:** `floatingCta.ts` shows it only in real gaps: never while any part of the hero or
+  of either form card is on screen, and never while its fixed lane would cover a section action, inline
+  link or FAQ control (Reveal's 32px travel included). It is `inert` and out of the tab order while hidden.
+- **Small screens:** the final form stacks its paired inputs below 360px, compact inputs use slimmer
+  side padding below 360px, and the contact heading keeps "in {City}" together below 1024px.
