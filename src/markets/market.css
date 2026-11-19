@@ -1,0 +1,62 @@
+/* Market-route-only overrides (task 68e909bd). Every rule is scoped under .frhc-market, the
+ * wrapper only /salem, /grants-pass, /medford and /olympia render, so the root and Portland
+ * pages keep their approved styles. Palette and geometry are unchanged; only contrast and
+ * minimum type size are corrected. */
+
+.frhc-market {
+  --market-error: #b91c1c; /* 6.5:1 on white */
+  --market-error-bg: #fef2f2;
+  --market-placeholder: #6b7280; /* 4.83:1 on white (template placeholder was 2.54:1) */
+  --market-input-border: #7d8797; /* 3.63:1 on white, 3.26:1 on the soft surface (template border was 1.33:1) */
+}
+
+/* Navy on the orange CTA fill is 5.25:1 (white was 2.03:1); primary-dark on the hover fill 5.42:1. */
+.frhc-market .btn-primary {
+  color: var(--color-primary);
+}
+.frhc-market .btn-primary:hover {
+  color: var(--color-primary-dark);
+}
+
+/* 3px accent-dark ring: at least 3:1 against both the white and the navy surfaces. */
+.frhc-market *:focus-visible {
+  outline: 3px solid var(--color-accent-dark);
+  outline-offset: 2px;
+}
+
+/* Below 360px the paired compact inputs need slimmer side padding to show "First name *" whole. */
+@media (max-width: 359px) {
+  .frhc-market .lp-input-compact {
+    padding-inline: 0.75rem;
+  }
+}
+
+/* 2px control boundaries at 3:1 or better; focus (sky) and error (red, !important) colors still win. */
+.frhc-market .lp-input {
+  border-width: 2px;
+}
+
+.frhc-market .lp-input:not(:focus) {
+  border-color: var(--market-input-border);
+}
+
+.frhc-market .lp-input::placeholder {
+  color: var(--market-placeholder);
+}
+
+.frhc-market .lp-field-error {
+  font-size: 0.875rem;
+  line-height: 1.35;
+  color: var(--market-error);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .frhc-market *,
+  .frhc-market *::before,
+  .frhc-market *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
