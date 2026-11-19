@@ -118,3 +118,20 @@ draws in an open shadow root and its host is 0px tall, so the host's own rect ca
   so the existing no-oscillation result still holds.
 - **Unchanged:** the chat, its loader and configuration, z-index order, tracking, legacy routes and
   every other floating rule (hero, form cards, control lane, `inert`, forward-only `#form`).
+
+## Trust-strip value scale (QA repair, report 08003f71)
+
+Independent QA (review task 63607326, report 08003f71) found that at 1024x768 with a classic scrollbar
+(clientWidth 1009), "Independently" at 36px (`lg:text-4xl`) overprinted "Same Day" on all four routes.
+"Independently" is about 7x its font size wide (252px at 36px), and a four-column cell's content box
+is about 184px at clientWidth 1009. The text also left its content box at 1050-1280 and at 440
+(two columns, 6.5px from the card edge).
+
+- **Change, `MarketStats.tsx` only:** one shared `VALUE_SCALE` on all four values. Sizes are 24px
+  (1 column), 20px from 440px (2 columns), 30px from 640px, 24px from 1024px (4 columns), 30px from
+  1280px, and 36px from 85rem (1360px), where the max-w-7xl strip is at full width. Copy, weight,
+  colour, labels, supporting text, padding, grid and section order are unchanged.
+- **Accepted at native width (classic 15px scrollbar):** at 320-1728, including both sides of every
+  breakpoint, each value is one line inside its cell's content box, with a positive gap to its
+  neighbour and no sideways scroll. The minimum cell gutter is 27px (at 440). At 390, 1440 and 1728
+  the strip region (cropped) is pixel-identical to the pre-repair build.
