@@ -135,3 +135,38 @@ is about 184px at clientWidth 1009. The text also left its content box at 1050-1
   breakpoint, each value is one line inside its cell's content box, with a positive gap to its
   neighbour and no sideways scroll. The minimum cell gutter is 27px (at 440). At 390, 1440 and 1728
   the strip region (cropped) is pixel-identical to the pre-repair build.
+
+## Floating CTA yields to static content; closing pairs side by side (QA ab9dfbaf / 835fb063)
+
+Independent QA (comment ab9dfbaf, bounded by 835fb063, 2026-11-19; attempt 2/3) found that at
+390x844 (clientWidth 375) the settled amber bar covered the `#local-care` heading on all four routes
+(Salem scrollY 1836, Grants Pass 1862, Medford 1888, Olympia 1836). The lane test only knew controls.
+
+- **Static content lane (`floatingCta.ts`):** the bar also hides while static content is within 12px
+  (`STATIC_GAP_PX`) of its lane. Static content means every painted text line in `main` and `footer`,
+  read per text node with a DOM Range (headings, body, eyebrows, stats, quotes, names, chips, address,
+  FAQ text), plus photos with alt text and icons. Text in screen-reader-only boxes (1px) is skipped,
+  and so are decorative backdrops (`alt=""`). Whole sections and cards are not used, so blank padding
+  and card fills stay usable. Each rect is joined with where it settles once any translate (a Reveal
+  still sliding in) is gone. The lane, the control test, the hero/form rules, chat clearance and
+  `inert` are unchanged.
+- **Instant hide, animated show:** the 200ms fade and 24px slide now run only when the bar shows. A
+  hide stops painting at once, so a fading bar never sits over text scrolling into its lane.
+- **No flash, no lag (`useScrollFlag`, opt-in):** the bar shows only after its lane has been clear for
+  150ms, so a gap scrolled straight through never flashes it. A hide is committed synchronously in the
+  scroll/resize/layout event, before that frame paints. Font loads also trigger a re-check. The
+  header's use of the hook is unchanged.
+- **Limit:** in Chromium the compositor can scroll a frame before the page's scroll event runs. The
+  12px gap absorbs small steps. A larger jump can show one frame of overlap before the hide, which a
+  main-thread frame recorder cannot see.
+- **Availability:** on phones the clear gaps are the space between sections, so the bar appears
+  where a reader pauses between sections and stays hidden over reading content. The header's Free
+  Assessment button stays available throughout.
+- **Closing pairs (`MarketPhotoBand.tsx`, `OfficeActions.tsx`):** from 1024px both pairs are side
+  by side and centered, with the same labels, targets, order and button classes. `#local-care`: from
+  1024 to 1279px the pair is a centered row under the photo and text. From 1280px it is centered under
+  the text column, on one line. It is 13-29px wider than that 479-485px column, so its box takes half
+  of each 48px gutter and the pair extends 6.6-14.2px past the column on each side (at least 33px
+  clear of the photo); this keeps the canonical column gap clear. Without the pair the
+  column would end 140-145px above the photo. `#service-area`: the address card spans the office card
+  and the pair is centered below it. Below 1024px both sections render exactly as before.

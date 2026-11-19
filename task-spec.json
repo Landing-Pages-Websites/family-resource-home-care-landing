@@ -1,0 +1,169 @@
+{
+  "$comment": "Documentation only: nothing in the build reads this file. Values are copied from the current task, the stage-0 build_context/ai_build_contract/brand/form_contract contracts and the shipped source named in each `source`. The root and Portland routes predate this task and are protected; they are listed under preservation, not as rebuilt scope.",
+  "task": {
+    "id": "68e909bd-bd9b-47a2-9972-89c61c44d419",
+    "title": "Build Landing Page — Family Resource Home Care",
+    "customer_id": "af6bf9ba-151a-4d28-9786-6a585c237ead",
+    "business_name": "Family Resource Home Care",
+    "website_url": "https://www.familyresourcehomecare.com/",
+    "vertical": "senior-home-care",
+    "landing_page_focus": "In-home senior care lead generation: form submissions and inbound calls from families seeking non-medical home care in the Salem, Grants Pass, Medford and Olympia markets (new Google Search campaigns).",
+    "traffic_source": "Google Search (client care only)",
+    "ad_platforms": ["google"],
+    "send_leads_to_crm": false,
+    "source": "current task input_data; stage-0 build_context.json"
+  },
+  "scope": {
+    "summary": "Four additive market routes on the existing site, mirroring the live Portland template. No other route was rebuilt.",
+    "number_of_landing_pages": 4,
+    "domain": "https://call.familyresourcehomecare.com",
+    "template_source": "https://call.familyresourcehomecare.com/portland-east (origin/main 5e5af5095d8629cb07e9d80eba3631a04c4430ac)",
+    "new_route_source": "src/app/{salem,grants-pass,medford,olympia}/page.tsx render src/markets/components/MarketPage.tsx",
+    "out_of_scope": [
+      "The root page and the Portland, Gresham, Hillsboro and Oregon City routes: preservation only.",
+      "Recruiting content, campaign changes and sibling-route changes."
+    ]
+  },
+  "routes": [
+    {
+      "path": "/salem",
+      "url": "https://call.familyresourcehomecare.com/salem",
+      "market": "Salem",
+      "state": "OR",
+      "cities": ["Salem", "Keizer", "Woodburn", "Independence", "Dallas"],
+      "counties": "Marion and Polk Counties",
+      "office_address": "670 Hawthorne Ave SE #140, Salem, OR 97301",
+      "phone_display": "(503) 990-6380",
+      "phone_e164": "+15039906380",
+      "location_source": "https://www.familyresourcehomecare.com/locations/salem-or/",
+      "form_ids": ["form-hero-salem", "form-contact-salem"],
+      "form_data_defaults": { "territory": "salem", "territoryName": "Salem", "territoryPhone": "(503) 990-6380" }
+    },
+    {
+      "path": "/grants-pass",
+      "url": "https://call.familyresourcehomecare.com/grants-pass",
+      "market": "Grants Pass",
+      "state": "OR",
+      "cities": ["Grants Pass", "Merlin", "Hugo", "Wilderville", "Murphy", "Rogue River"],
+      "counties": "Josephine County",
+      "office_address": "820 NE E St, Ste G, Grants Pass, OR 97526",
+      "phone_display": "(541) 204-1451",
+      "phone_e164": "+15412041451",
+      "location_source": "https://www.familyresourcehomecare.com/locations/grants-pass/",
+      "form_ids": ["form-hero-grants-pass", "form-contact-grants-pass"],
+      "form_data_defaults": { "territory": "grants-pass", "territoryName": "Grants Pass", "territoryPhone": "(541) 204-1451" }
+    },
+    {
+      "path": "/medford",
+      "url": "https://call.familyresourcehomecare.com/medford",
+      "market": "Medford",
+      "state": "OR",
+      "cities": ["Medford", "Ashland", "Central Point", "Eagle Point", "Jacksonville", "Phoenix", "Talent", "White City", "Shady Cove"],
+      "counties": "Jackson County",
+      "office_address": "1150 Crater Lake Ave Ste I, Medford, OR 97504",
+      "phone_display": "(541) 392-8665",
+      "phone_e164": "+15413928665",
+      "location_source": "https://www.familyresourcehomecare.com/locations/medford/",
+      "form_ids": ["form-hero-medford", "form-contact-medford"],
+      "form_data_defaults": { "territory": "medford", "territoryName": "Medford", "territoryPhone": "(541) 392-8665" }
+    },
+    {
+      "path": "/olympia",
+      "url": "https://call.familyresourcehomecare.com/olympia",
+      "market": "Olympia",
+      "state": "WA",
+      "cities": ["Olympia", "Lacey", "Tumwater"],
+      "counties": "Thurston, Mason and Lewis Counties",
+      "office_address": "2620 RW Johnson Blvd Southwest, Suite 104, Tumwater, WA 98512",
+      "phone_display": "(360) 522-4024",
+      "phone_e164": "+13605224024",
+      "location_source": "https://www.familyresourcehomecare.com/locations/olympia/",
+      "form_ids": ["form-hero-olympia", "form-contact-olympia"],
+      "form_data_defaults": { "territory": "olympia", "territoryName": "Olympia", "territoryPhone": "(360) 522-4024" }
+    }
+  ],
+  "routes_source": "src/markets/markets.ts (MARKETS, marketFormId, marketFormDataDefaults); phones from task input_data.phone_routing_number",
+  "form": {
+    "type": "custom",
+    "placements": ["hero", "contact"],
+    "final_target": "#form",
+    "reuse_form_on_all_pages": true,
+    "task_form_fields": "First Name (required), Last Name (required), Email Address (required), Phone Number (required), Home ZIP Code (required), Are you or your loved one ready to receive care? (Yes/No, required), How did you hear about us? (optional) — identical to the Portland pages",
+    "fields": [
+      { "name": "firstName", "kind": "text", "label": "First Name", "required": true },
+      { "name": "lastName", "kind": "text", "label": "Last Name", "required": true },
+      { "name": "email", "kind": "email", "label": "Email Address", "required": true },
+      { "name": "phone", "kind": "tel", "label": "Phone Number", "required": true },
+      { "name": "zip", "kind": "text", "format": "zip", "label": "Home ZIP Code", "required": true },
+      {
+        "name": "ready",
+        "kind": "toggle",
+        "label": "Are you or your loved one ready to receive care?",
+        "required": true,
+        "options": [{ "value": "yes", "label": "Yes" }, { "value": "no", "label": "No" }]
+      },
+      {
+        "name": "heardFrom",
+        "kind": "select",
+        "label": "How did you hear about us?",
+        "required": false,
+        "options": ["google_search", "google_ads", "facebook", "referral_friend", "referral_medical", "referral_other", "other"]
+      }
+    ],
+    "approved_form_data_keys": ["firstName", "lastName", "email", "phone", "zip", "ready", "heardFrom"],
+    "qualification": {
+      "rule": { "field": "ready", "disqualifyingValues": ["no"], "reason": "not_ready_to_start_care" },
+      "yes": { "submits": true, "form_data.qualified": true, "form_data.disqualification_reason": null, "qualified_lead_event": true },
+      "no": { "submits": true, "form_data.qualified": false, "form_data.disqualification_reason": "not_ready_to_start_care", "qualified_lead_event": false }
+    },
+    "sms": "none: no SMS checkbox, disclosure or implied consent",
+    "privacy_url": "https://www.familyresourcehomecare.com/privacy/",
+    "notification_emails": ["marketing@familyrhc.com", "care@familyrhc.com"],
+    "source": "src/site.ts SITE.fields and SITE.qualificationRules; src/lib/leadPayload.ts; src/markets/formEvents.ts; stage-0 form_contract.json; task input_data.form_fields"
+  },
+  "tracking": {
+    "gtm_container_id": "GTM-W95T5CC",
+    "mega_site_id": "bc581877-3414-42e7-a11e-a499c8292999",
+    "source_provider": "family-resource-home-care-landing",
+    "call_tracking": "CallTrackingMetrics script (src/app/layout.tsx), unchanged from the protected original",
+    "events": ["form_submission (dataLayer, after the lead API confirms)", "qualified_lead (MegaTag + dataLayer, ready = yes only)"],
+    "source": "src/components/Brand.ts; src/site.ts; src/app/layout.tsx; task output_data"
+  },
+  "brand": {
+    "colors": { "primary": "#13406B", "secondary": "#46BCEC", "accent": "#F5A623" },
+    "fonts": { "display": "Manrope", "body": "Inter" },
+    "logo": "https://call.familyresourcehomecare.com/logo.png",
+    "primary_cta": "Request My Free In-Home Assessment",
+    "secondary_cta": "Call the market office phone",
+    "new_route_labels": { "form_submit": "Request My Free In‑Home Assessment", "section_and_floating_cta": "Get My Free Assessment", "call": "Call {phone_display}" },
+    "source": "stage-0 brand.json (scanned from /portland-east) and build_context.json; new_route_labels from src/site.ts primaryCta and src/markets/content.ts SUBMIT_LABEL / PRIMARY_CTA"
+  },
+  "services_in_scope": ["Personal Care", "Companion Care", "Meal Preparation", "Transportation & Errands", "Veteran Care", "After-Hospital / Transitional Care", "Respite Care", "24-hour Care"],
+  "active_bans": {
+    "must_not_say": ["home health", "assisted living", "Medicare", "Live-in care"],
+    "must_not_advertise": ["Dementia/Alzheimer's services (Google Ads compliance)"],
+    "kept": ["24-hour care", "Medicaid only as a generic payment option (state Medicaid programs), including on the Olympia, WA page"],
+    "creative": [
+      "Only the leaf taken directly from the FRHC logo; no substitute leaf graphics",
+      "No footage of the former admin staffer from the recruiting b-roll"
+    ],
+    "no_recruiting": "No job-seeker links or fields on these client-care pages",
+    "source": "stage-0 ai_build_contract.json customer_donts; build_context.json messagingGuardrails; current customer context"
+  },
+  "sections": {
+    "anchors_in_dom_order": ["hero", "trust-bar", "local-care", "about", "services", "how-it-works", "why-us", "our-story", "service-area", "testimonials", "faq", "contact"],
+    "final_form_anchor": "#form",
+    "trust_bar_facts": ["Independently Owned", "Same Day Assessments", "24/7 On-Call Support", "Local Caregivers"]
+  },
+  "preservation": {
+    "protected_original_files": "All 61 files at 5e5af5095d8629cb07e9d80eba3631a04c4430ac stay byte-identical, including the root content-sources.json manifest.",
+    "protected_routes": ["/", "/portland-east", "/portland-west", "/gresham", "/hillsboro", "/oregon-city"],
+    "new_market_provenance": "src/markets/PROVENANCE.md (append-only)",
+    "history": [
+      { "pr": 19, "commit": "255892b", "change": "Added the four market routes" },
+      { "pr": 20, "commit": "e979a05", "change": "Floating CTA kept clear of the inherited chat widget" },
+      { "pr": 21, "commit": "aaf9cda", "change": "Trust-strip values fit their cells at every width" },
+      { "qa": "ab9dfbaf-025c-4267-b7cb-92dfab3e24a8 / 835fb063-726b-4f89-b0e5-e57ad192dfef (2026-11-19)", "change": "Floating CTA yields to static text and photos; #local-care and #service-area desktop action pairs side by side and centered; this task-spec added" }
+    ]
+  }
+}
