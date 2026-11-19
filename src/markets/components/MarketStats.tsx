@@ -4,7 +4,7 @@ import { SITE } from "@/site";
 import { STATS } from "../content";
 
 const STAGGER_MS = 80;
-/** One size for all four values, stepped to measured cell widths so "Independently" fits (see PROVENANCE.md). */
+/** One size for all four values, stepped to measured cell widths so the widest value fits (see PROVENANCE.md). */
 const VALUE_SCALE = "text-2xl min-[440px]:text-xl sm:text-3xl lg:text-2xl xl:text-3xl min-[85rem]:text-4xl";
 
 /** The template's overlapping four-cell trust strip. One column on narrow phones so no value overflows. */

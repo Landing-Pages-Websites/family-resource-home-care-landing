@@ -153,17 +153,19 @@
   "sections": {
     "anchors_in_dom_order": ["hero", "trust-bar", "local-care", "about", "services", "how-it-works", "why-us", "our-story", "service-area", "testimonials", "faq", "contact"],
     "final_form_anchor": "#form",
-    "trust_bar_facts": ["Independently Owned", "Same Day Assessments", "24/7 On-Call Support", "Local Caregivers"]
+    "trust_bar_facts": ["50+ Years of History", "Same Day Assessments", "24/7 On-Call Support", "Local Caregivers"],
+    "trust_bar_facts_superseded": { "Independently Owned": "Replaced by 50+ Years of History in task 1293b210 (human send-back f79bba62). The hero trust line keeps 'Independently owned'." }
   },
   "preservation": {
-    "protected_original_files": "All 61 files at 5e5af5095d8629cb07e9d80eba3631a04c4430ac stay byte-identical, including the root content-sources.json manifest.",
+    "protected_original_files": "All 61 files at 5e5af5095d8629cb07e9d80eba3631a04c4430ac stay byte-identical, except the root content-sources.json manifest, which task 1293b210 extended with one additive provenance key (every earlier value retained).",
     "protected_routes": ["/", "/portland-east", "/portland-west", "/gresham", "/hillsboro", "/oregon-city"],
     "new_market_provenance": "src/markets/PROVENANCE.md (append-only)",
     "history": [
       { "pr": 19, "commit": "255892b", "change": "Added the four market routes" },
       { "pr": 20, "commit": "e979a05", "change": "Floating CTA kept clear of the inherited chat widget" },
       { "pr": 21, "commit": "aaf9cda", "change": "Trust-strip values fit their cells at every width" },
-      { "qa": "ab9dfbaf-025c-4267-b7cb-92dfab3e24a8 / 835fb063-726b-4f89-b0e5-e57ad192dfef (2026-11-19)", "change": "Floating CTA yields to static text and photos; #local-care and #service-area desktop action pairs side by side and centered; this task-spec added" }
+      { "qa": "ab9dfbaf-025c-4267-b7cb-92dfab3e24a8 / 835fb063-726b-4f89-b0e5-e57ad192dfef (2026-11-19)", "change": "Floating CTA yields to static text and photos; #local-care and #service-area desktop action pairs side by side and centered; this task-spec added" },
+      { "task": "1293b210-1072-4b2d-925a-60867039f491", "human_sendback": "https://admin.gomega.ai/tasks/f79bba62-9e13-4703-bd45-7bdb3cece492 qa_failure_reason", "change": "Trust-strip stat 1 is 50+ Years of History; testimonial card 1 is market-specific (Salem, Roseburg, Spouse of Client) and card 2 is the meals-and-walks excerpt; the minimum-visit FAQ answer ends on the shift length" }
     ]
   }
 }

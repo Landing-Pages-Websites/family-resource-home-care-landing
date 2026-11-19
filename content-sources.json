@@ -139,5 +139,33 @@
       "oregon-city": ["caregiver-hero.jpg (hero bg)","frhc-team-moment.webp (photo band)","frhc-about.webp (welcome)","frhc-hero-wide.webp (how-it-works bg)","family-home.jpg (video story)"]
     },
     "structural_change": "HowItWorks ('Not sure where to start?') now sits between Services and WhyUs, redesigned as a full-width dark-navy band with horizontal stepper + accent stripes — visually distinct from the white card grids above (Services) and below (WhyUs)."
+  },
+  "edit_2026_11_19_market_proof_sendback": {
+    "task_id": "1293b210-1072-4b2d-925a-60867039f491",
+    "scope": "Market routes /salem, /grants-pass, /medford and /olympia only (src/markets/content.ts). The Portland-era values above are unchanged and still describe the root and Portland routes.",
+    "spec_source": "Human send-back https://admin.gomega.ai/tasks/f79bba62-9e13-4703-bd45-7bdb3cece492 qa_failure_reason; exact copy supplied there.",
+    "stat": {
+      "stat_value": "50+ Years of History",
+      "claim": "One of the largest independently owned home care agencies in the country, not a franchise.",
+      "source": "https://www.familyresourcehomecare.com/how-we-help/frequently-asked-questions/ — 'How long have you been in business?' (history spans more than 50 years, with roots in several family-owned agencies; current organization formed 2018) and 'Are you a franchise?' (one of the largest independently-owned home care agencies in the country).",
+      "superseded": "Independently / Owned / Not a franchise, with caregivers backed by our local team."
+    },
+    "testimonials": {
+      "source": "https://www.familyresourcehomecare.com/about/awards-reviews-testimonials/testimonials/ — excerpts verified 2026-11-19; '…' marks each cut.",
+      "first_card_by_route": {
+        "salem": "Happy Salem Client, 2026",
+        "grants-pass": "Happy Roseburg Husband of Client, 2026",
+        "medford": "Happy Roseburg Husband of Client, 2026",
+        "olympia": "Spouse of Client, 2024"
+      },
+      "second_card": "Happy Client, 2025 (shown as Family Resource Client)",
+      "third_card": "Happy Portland East Client, 2026 (unchanged)",
+      "superseded": "First card Spokane Family Member of Client, 2026; second card closing excerpt with a leading ellipsis."
+    },
+    "faq": {
+      "question": "What is the minimum visit length?",
+      "answer": "Our minimum shift is two to four hours, depending on the branch.",
+      "source": "https://www.familyresourcehomecare.com/how-we-help/frequently-asked-questions/ — 'Do you have a minimum level of service?'"
+    }
   }
 }
