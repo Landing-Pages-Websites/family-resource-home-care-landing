@@ -92,3 +92,23 @@ lives in `src/markets/**`.
   link or FAQ control (Reveal's 32px travel included). It is `inert` and out of the tab order while hidden.
 - **Small screens:** the final form stacks its paired inputs below 360px, compact inputs use slimmer
   side padding below 360px, and the contact heading keeps "in {City}" together below 1024px.
+
+## Floating CTA and the inherited chat widget (round 3, production repair)
+
+On production (`/salem`, 390x844, scrollY 1900, chat prompt dismissed), the GTM-loaded `<chat-widget>`
+launcher (58px, fixed at right 20 / bottom 20; rect x312..370, y766..824) covered the right end of the
+floating bar (x12..378, y778.8..832). Two of the nine hit points landed on `CHAT-WIDGET`. The widget
+draws in an open shadow root and its host is 0px tall, so the host's own rect cannot be used.
+
+- **Change, `src/markets/**` only:** `chatBoxes()` reads the painted shadow-root parts (launcher,
+  prompt, panel). `chatClearance()` lifts the bar 12px above every part that overlaps it horizontally,
+  through `bottom: max(<resting>, var(--chat-clearance))`. Without a chat, the bar keeps its resting
+  12px / 24px. The bar is hidden only when the lift would take it past 45% of the viewport (an open
+  panel). It reappears when the panel closes.
+- **Updates are event-driven (`useChatClearance`):** it re-measures when a chat host is added, when
+  the element upgrades, on host or shadow mutations, on part resizes, on transition or animation end,
+  and on viewport resize. There is no polling and no scroll listener.
+- **Animation:** only opacity and translate are animated. The lane math already ignores the translate,
+  so the existing no-oscillation result still holds.
+- **Unchanged:** the chat, its loader and configuration, z-index order, tracking, legacy routes and
+  every other floating rule (hero, form cards, control lane, `inert`, forward-only `#form`).

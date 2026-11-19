@@ -1,22 +1,32 @@
 "use client";
 
-import { useCallback, useRef, type ReactElement } from "react";
+import { useCallback, useRef, type CSSProperties, type ReactElement } from "react";
 import { FORM_ANCHOR } from "@/site";
 import { PRIMARY_CTA } from "../content";
-import { shouldShowFloatingCta } from "../floatingCta";
+import { chatBoxes, chatClearance, shouldShowFloatingCta } from "../floatingCta";
 import { MarketIcon } from "./MarketIcon";
+import { useChatClearance } from "./useChatClearance";
 import { useScrollFlag } from "./useScrollFlag";
 
-/** Forward-only CTA to the final form, shown only in real gaps between the hero and the final form. */
+/**
+ * Forward-only CTA to the final form, shown only in real gaps between the hero and the final form.
+ * It rests above the inherited chat widget's painted UI, and hides while that UI leaves no room.
+ */
 export function MarketFloatingCTA(): ReactElement {
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const read = useCallback(() => shouldShowFloatingCta(wrapperRef.current), []);
+  const measureChat = useCallback(() => {
+    const wrapper = wrapperRef.current;
+    return wrapper ? chatClearance(wrapper.getBoundingClientRect(), chatBoxes(), window.innerHeight) : 0;
+  }, []);
+  const chat = useChatClearance(measureChat);
+  const read = useCallback(() => chat.fits && shouldShowFloatingCta(wrapperRef.current), [chat]);
   const show = useScrollFlag(read);
   const visibility = show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6 pointer-events-none";
   return (
     <div
       ref={wrapperRef}
-      className={`fixed z-40 bottom-3 inset-x-3 sm:inset-x-auto sm:bottom-6 sm:right-6 transition-all duration-200 ${visibility}`}
+      style={{ "--chat-clearance": `${chat.offset}px` } as CSSProperties}
+      className={`fixed z-40 bottom-[max(0.75rem,var(--chat-clearance))] inset-x-3 sm:inset-x-auto sm:bottom-[max(1.5rem,var(--chat-clearance))] sm:right-6 transition-[opacity,translate] duration-200 ${visibility}`}
       aria-hidden={!show}
       inert={!show}
     >
