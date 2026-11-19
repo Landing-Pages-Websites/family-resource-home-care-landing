@@ -22,7 +22,7 @@ export function SectionBackdrop({ image, opacity, priority = false }: SectionBac
       style={{ aspectRatio: `${image.width} / ${image.height}` }}
       className="absolute inset-x-0 top-0 lg:!aspect-auto lg:bottom-0 pointer-events-none [mask-image:linear-gradient(to_bottom,black_55%,transparent)] lg:[mask-image:none]"
     >
-      <Image src={image.src} alt="" fill priority={priority} sizes="(min-width: 1024px) 140vw, 100vw" className={`object-cover object-center ${opacity}`} />
+      <Image src={image.src} alt="" fill priority={priority} fetchPriority={priority ? "high" : undefined} sizes="(min-width: 1024px) 140vw, 100vw" className={`object-cover object-center ${opacity}`} />
     </div>
   );
 }

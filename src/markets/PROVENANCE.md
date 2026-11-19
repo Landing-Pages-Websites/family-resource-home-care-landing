@@ -195,3 +195,12 @@ answer on all four routes. Everything else above stays in force.
 - The hero ownership line ("Independently owned") and the other three stats are unchanged. The
   trust-strip value scale above stays as measured for "Independently"; "50+" is narrower.
 - No layout, class, image, form, phone, CTA or tracking change.
+
+## Hero request-priority hint (task 1293b210, performance send-back)
+
+QA comment cef54750-ab5c-4053-b230-eb12e9eef4ff: Medford mobile LCP median over the floor; the LCP
+node is the hero hug photo, already eager and preloaded but without an explicit high-priority hint.
+`SectionBackdrop` now passes `fetchPriority="high"` when `priority` is set (the hero only), so the
+existing responsive preload and the `<img>` both carry `fetchpriority="high"`. Nonvisual: same
+photo bytes, src/srcset/sizes, crop, mask, opacity, classes and stylesheets; no added preload. The
+human send-back above stays in force. This hint alone is not claimed to meet the performance floor.
