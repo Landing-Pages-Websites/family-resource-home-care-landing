@@ -4,6 +4,8 @@ import { SITE } from "@/site";
 import { STATS } from "../content";
 
 const STAGGER_MS = 80;
+/** One size for all four values, stepped to measured cell widths so "Independently" fits (see PROVENANCE.md). */
+const VALUE_SCALE = "text-2xl min-[440px]:text-xl sm:text-3xl lg:text-2xl xl:text-3xl min-[85rem]:text-4xl";
 
 /** The template's overlapping four-cell trust strip. One column on narrow phones so no value overflows. */
 export function MarketStats(): ReactElement {
@@ -14,7 +16,7 @@ export function MarketStats(): ReactElement {
           {STATS.map((stat, i) => (
             <Reveal key={stat.label} variant="up" delay={i * STAGGER_MS}>
               <div className="p-5 sm:p-6 lg:p-7 text-center">
-                <div className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[var(--color-primary)] leading-none">{stat.value}</div>
+                <div className={`${VALUE_SCALE} font-extrabold text-[var(--color-primary)] leading-none`}>{stat.value}</div>
                 <div className="mt-2 text-sm font-bold uppercase tracking-wider text-[var(--color-primary)]">{stat.label}</div>
                 <p className="mt-1.5 text-sm text-[var(--color-text-muted)] leading-snug">{stat.sub}</p>
               </div>
