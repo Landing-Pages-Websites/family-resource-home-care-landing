@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { chatClearance, coversLane, floatingLane, HIDDEN_SHIFT_PX } from "./floatingCta";
+import { chatClearance, coversLane, crowdsLane, floatingLane, floatingVisibility, HIDDEN_SHIFT_PX, settledBounds } from "./floatingCta";
 
 // The bar shown at 760-820px, and the same bar hidden (24px lower) or mid-fade.
 const SHOWN = { top: 760, bottom: 820, left: 12, right: 378 };
@@ -81,5 +81,72 @@ describe("floating CTA chat clearance", () => {
 
   it("ignores chat boxes outside the viewport", () => {
     assert.equal(chatClearance(PHONE_BAR, [{ top: 900, bottom: 958, left: 312, right: 370 }], 844), 0);
+  });
+});
+
+// QA's settled failure (Salem, 390x844, usable 375, scrollY 1836): the bar at 676.83-730 with the
+// prompt-free chat lift, over both lines of the #local-care heading.
+const QA_BAR = { top: 676.828125, bottom: 730, left: 12, right: 363 };
+const QA_HEADING_LINES = [
+  { top: 682.515625, bottom: 723.515625, left: 41.21875, right: 333.765625 },
+  { top: 720.015625, bottom: 761.015625, left: 43.671875, right: 331.328125 },
+];
+
+describe("floating CTA static content lane", () => {
+  it("is crowded by each line of the heading QA saw under the settled bar", () => {
+    const lane = floatingLane(QA_BAR, 0);
+    for (const line of QA_HEADING_LINES) assert.equal(crowdsLane(lane, line), true);
+  });
+
+  it("gives the same answer while the bar is hidden 24px lower", () => {
+    const hidden = { ...QA_BAR, top: QA_BAR.top + 24, bottom: QA_BAR.bottom + 24 };
+    assert.equal(crowdsLane(floatingLane(hidden, 24), QA_HEADING_LINES[0]), true);
+  });
+
+  it("keeps a 12px breathing gap above and below the lane, and nothing beyond it", () => {
+    const lane = floatingLane(QA_BAR, 0); // 676.83 to 754
+    assert.equal(crowdsLane(lane, { top: 600, bottom: 665, left: 40, right: 330 }), true, "11.8px above the bar");
+    assert.equal(crowdsLane(lane, { top: 600, bottom: 664.5, left: 40, right: 330 }), false, "12.3px above the bar");
+    assert.equal(crowdsLane(lane, { top: 766.5, bottom: 800, left: 40, right: 330 }), false, "12.5px below the hidden bar");
+    assert.equal(crowdsLane(lane, { top: 765, bottom: 800, left: 40, right: 330 }), true, "11px below the hidden bar");
+  });
+
+  it("ignores content beside a narrow desktop bar", () => {
+    const lane = floatingLane({ top: 790, bottom: 842, left: 1130, right: 1416 }, 0);
+    assert.equal(crowdsLane(lane, { top: 780, bottom: 820, left: 300, right: 1100 }), false);
+    assert.equal(crowdsLane(lane, { top: 780, bottom: 820, left: 300, right: 1125 }), true);
+  });
+});
+
+describe("floating CTA settled bounds", () => {
+  it("is the painted rect itself when nothing is translated", () => {
+    const rect = { top: 700, bottom: 740, left: 40, right: 330 };
+    assert.deepEqual(settledBounds(rect, { x: 0, y: 0 }), rect);
+  });
+
+  it("covers the whole remaining Reveal travel of content still sliding up", () => {
+    // translate-y-8 (32px) before Reveal starts: the line will settle 32px higher than it paints now.
+    const line = { top: 790, bottom: 831, left: 41, right: 334 };
+    assert.deepEqual(settledBounds(line, { x: 0, y: 32 }), { top: 758, bottom: 831, left: 41, right: 334 });
+    assert.equal(crowdsLane(floatingLane(QA_BAR, 0), line), false, "its painted rect alone looks clear");
+    assert.equal(crowdsLane(floatingLane(QA_BAR, 0), settledBounds(line, { x: 0, y: 32 })), true);
+  });
+
+  it("covers a sideways Reveal (-translate-x-6) toward its resting place", () => {
+    const photo = { top: 500, bottom: 700, left: 16, right: 600 };
+    assert.deepEqual(settledBounds(photo, { x: -24, y: 0 }), { top: 500, bottom: 700, left: 16, right: 624 });
+  });
+});
+
+describe("floating CTA visibility", () => {
+  it("fades and slides in when shown", () => {
+    const shown = floatingVisibility(true).split(" ");
+    for (const cls of ["transition-[opacity,translate]", "duration-200", "opacity-100", "translate-y-0"]) assert.ok(shown.includes(cls), cls);
+  });
+
+  it("stops painting at once when hidden, so a fading bar never covers content scrolling under it", () => {
+    const hidden = floatingVisibility(false).split(" ");
+    for (const cls of ["opacity-0", "translate-y-6", "pointer-events-none"]) assert.ok(hidden.includes(cls), cls);
+    assert.ok(!hidden.some((cls) => cls.startsWith("transition") || cls.startsWith("duration")), "no hide transition");
   });
 });
